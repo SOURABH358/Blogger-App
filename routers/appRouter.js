@@ -3,14 +3,14 @@ const userController = require('../controllers/userControllers')
 const blogsControllers = require('../controllers/blogsController')
 const router = express.Router();
 
-router()
+router
 .route('/user')
 .get(userController.getUser)
-.put(userController.createUser)
+.post(userController.createUser)
 
-router()
+router
 .route('/blogs')
 .get(blogsControllers.getAllBlogs)
-.put(blogsControllers.createBlog)
+.post(blogsControllers.createBlog)
 
 module.exports = router;

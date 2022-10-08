@@ -8,6 +8,14 @@ const BlogsSchema = new mongoose.Schema({
     content: {
         type: String,
         required: [true, 'Please provide a content for your Blog']
+    },
+    tags: [{
+        type: String,
+        required: [true, 'Please provide tags for your blog']
+    }],
+    createdAt: {
+        type: Date,
+        default: Date.now()
     }
 })
 

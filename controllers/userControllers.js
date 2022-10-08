@@ -1,7 +1,7 @@
 const userModel = require('../models/userModels')
 
-exports.getUser = async (req, res,next) =>{
-    res.statusCode(200).json({
+exports.getUser = (req, res, next) =>{
+    res.status(200).json({
         status: 'successful',
         data: {
             userName: 'abcd@123',
@@ -9,10 +9,11 @@ exports.getUser = async (req, res,next) =>{
     })
 }
 
-exports.createUser = async (req,res,next)=>{
-    const {userName, Password} = req.body;
-    res.statusCode(200).json({
+exports.createUser = (req,res,next)=>{
+    // const {userName, Password} = req.body;
+    console.log(req.body)
+    res.status(200).json({
         status: 'successful',
-        message: `User with username ${userName} created`
+        message: `User with username ${req.body.userName} created`
     })
 }

@@ -1,7 +1,7 @@
 const blogModels = require('../models/blogModels')
 
 exports.getAllBlogs = async (req, res, next) =>{
-    res.statusCode(200).json({
+    res.status(200).json({
         status: 'successful',
         data: {
             title: 'What is Web 3.0?',
@@ -10,10 +10,10 @@ exports.getAllBlogs = async (req, res, next) =>{
     })
 }
 
-exports.createBlog = async (req,res, next)=>{
+exports.createBlog = (req,res, next)=>{
     const {title, content} = req.body;
 
-    res.statusCode(200).json({
+    res.status(200).json({
         status: 'successful',
         data: {
             title,

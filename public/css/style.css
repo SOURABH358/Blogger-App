@@ -1,0 +1,134 @@
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 16px;
+}
+body{
+    min-width: 1440px;
+    width: 100%;
+    
+}
+
+ul li{
+    list-style: none;
+    
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+.navbar{
+    width: 100%;
+    height: 6rem;
+    background-color: rgb(227, 11, 92);
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    font-size: 2.5rem;
+    flex-basis: 20%;
+    text-align: center;
+    color: white;
+}
+.tabs{
+    flex-basis:60%;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+.tabs li{
+    font-size: 1.5rem;
+}
+.account{
+    flex-basis: 20%;
+    text-align: center;
+}
+.account img{
+    width: 2rem;
+}
+.filter{
+    width: 80%;
+    text-align: center;
+    margin: 2rem auto;
+}
+.filter label{
+    font-size: 1.2rem;
+    margin-right: 2rem;
+}
+#tag_filter{
+    width: 60%;
+    padding: 0.5rem 1rem;
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    text-align: center;
+}
+.blogs_container{
+    display: grid;
+    width: 80%;
+    margin: 1rem auto;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 4rem;
+    column-gap:5rem;
+}
+.blog_card{
+    height: 30vw;
+    border: 1px solid rgb(227, 11, 92);
+    border-radius: 1rem;
+    padding: 1rem;
+    color: black;
+}
+.blog_card .blog_bg{
+    overflow: hidden;
+    height: 65%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+.blog_card .blog_bg img{
+    width: 100%;
+    height: 100%;
+    
+    transition: all 0.5s ease-in-out;
+}
+.blog_card .blog_bg img:hover{
+    transform: scale(1.25);
+    
+}
+.blog_info{
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.blog_title{
+    text-align: center;
+    font-size: 1.5rem;
+    color: black;
+
+}
+.tags{
+    font-style: italic;
+    color: rgb(227, 11, 92);
+    text-align: center;
+}
+.tags span{
+    border: 1px solid rgb(227, 11, 92);
+    border-radius: 0.5rem;
+    margin: 0 0.5rem;
+    padding: 0 0.4rem;
+    transition: all 0.5s ease-in-out;
+}
+.tags span:hover{
+    background-color: rgb(227, 11, 92);
+    color: white;
+}
+.blog_inscript{
+}
+.blog_create{
+    display: flex;
+    justify-content: space-between;
+}

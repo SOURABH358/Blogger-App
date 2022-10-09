@@ -1,13 +1,31 @@
 const blogModels = require('../models/blogModels')
 
 exports.getAllBlogs = async (req, res, next) =>{
-    res.status(200).json({
-        status: 'successful',
-        data: {
-            title: 'What is Web 3.0?',
-            content: 'lorem lorem lorem lorem lorem lorem lorem.'
-        }
+    
+   try{
+       
+    const blogs = await blogModels.find(req.query).select('-__v').sort('-createdAt')
+    
+    // res
+    // .status(200)
+    // .json({
+    //     'status':'sucess',
+    //     blogs
+    // })
+    res
+    .status(200)
+    .render('home',{
+        blogs
     })
+   }catch(error)
+   {
+    res
+    .status(404)
+    .json({
+        'status': 'failed',
+        error
+    })
+   }
 }
 
 exports.createBlog = (req,res, next)=>{

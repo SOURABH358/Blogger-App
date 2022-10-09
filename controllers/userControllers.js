@@ -1,12 +1,19 @@
 const userModel = require('../models/userModels')
 
 exports.getUser = (req, res, next) =>{
-    res.status(200).json({
-        status: 'successful',
-        data: {
-            userName: 'abcd@123',
-        }
-    })
+    try{
+        res
+    .status(200)
+    .render('user')
+    }catch(error){
+        res
+        .status(404)
+        .json({
+            'status':'failure',
+            error
+        })
+    }
+
 }
 
 exports.createUser = (req,res,next)=>{

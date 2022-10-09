@@ -1,0 +1,25 @@
+extend base
+
+block content 
+    main
+        .filter
+            label(for='tag_filter') Search By Tags
+            select#tag_filter(name='tags' placehoder='search by tags')
+                option(value=' ' default='')  All
+                option(value='Web development') Web development
+                option(value='Javascript') Javascript
+                option(value='Programming') Programming
+        .blogs_container
+            each blog in blogs
+                .blog_card
+                    .blog_bg
+                        img(src='../images/blog-bg.jpg' alt='blog-bg')
+                    .blog_info
+                        p.blog_title #{blog.title}
+                        .blog_inscript= blog.content.substr(0,100)
+                        .blog_create
+                            div Date: 06/10/2022
+                            div Author: Sourabh Yadav
+                        .tags
+                            each tag in blog.tags 
+                                span #{tag}

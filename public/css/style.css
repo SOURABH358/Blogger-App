@@ -126,9 +126,47 @@ a{
     background-color: rgb(227, 11, 92);
     color: white;
 }
-.blog_inscript{
-}
+
 .blog_create{
     display: flex;
     justify-content: space-between;
+}
+
+/* user page */
+
+.user_container{
+    width: 50%;
+    margin: 4rem auto;
+    padding: 2rem 1rem;
+    border: 2px solid rgb(227, 11, 92);
+    border-radius: 2rem;
+}
+.user_pic{
+    height: 10vw;
+    text-align: center;
+}
+.user_photo{
+    width: 9rem;
+    margin: auto;
+    height: 9rem;
+    border-radius: 50%;
+    background-color: lightblue;
+}
+.user_info{
+    padding: 2rem;
+}
+.user_details{
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    font-size: 1.2rem;
+    column-gap: 2rem;
+    margin-bottom: 3rem;
+}
+.user_details p:nth-child(2)
+{
+    border-bottom: 1px solid rgb(227, 11, 92);
+}
+hr{
+    color: rgb(227, 11, 92);
+    background-color: rgb(227, 11, 92);
 }

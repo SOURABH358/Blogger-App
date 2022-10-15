@@ -4,9 +4,13 @@ const blogsControllers = require('../controllers/blogsController')
 const router = express.Router();
 
 router
-.route('/user')
-.get(userController.getUser)
-.post(userController.createUser)
+.route('/user/signup')
+.post(userController.signUpUser)
+
+router
+.route('/user/login')
+.post(userController.logInUser)
+
 
 router
 .route('/blogs')

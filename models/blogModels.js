@@ -16,6 +16,10 @@ const BlogsSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now()
+    },
+    Author : {
+        type: String, 
+        required : [true, 'Please provide author']
     }
 })
 

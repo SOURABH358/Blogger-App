@@ -3,12 +3,15 @@ extend base
 block content 
     main
         .filter
-            label(for='tag_filter') Search By Tags
-            select#tag_filter(name='tags' placehoder='search by tags')
-                option(value=' ' default='')  All
-                option(value='Web development') Web development
-                option(value='Javascript') Javascript
-                option(value='Programming') Programming
+            p Search By Tags
+            .blog__tags 
+                each tag in tagList 
+                    a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
+            //- select#tag_filter(name='tags' placehoder='search by tags')
+            //-     option(value=' ' default='')  All
+            //-     option(value='Web development') Web development
+            //-     option(value='Javascript') Javascript
+            //-     option(value='Programming') Programming
         .blogs_container
             each blog in blogs
                 .blog_card
@@ -18,8 +21,8 @@ block content
                         p.blog_title #{blog.title}
                         .blog_inscript= blog.content.substr(0,100)
                         .blog_create
-                            div Date: 06/10/2022
-                            div Author: Sourabh Yadav
+                            div= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
+                            div #{blog.Author}
                         .tags
                             each tag in blog.tags 
                                 span #{tag}

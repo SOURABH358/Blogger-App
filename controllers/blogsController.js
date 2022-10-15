@@ -1,21 +1,17 @@
 const blogModels = require('../models/blogModels')
 
 exports.getAllBlogs = async (req, res, next) =>{
-    
    try{
-       
+    const list = await blogModels.find().select('tags').sort('tags');
+    const newList = list.map(ele=>ele.tags.join(",")).join(",").split(",");
+    const tagList = [...new Set(newList)]
     const blogs = await blogModels.find(req.query).select('-__v').sort('-createdAt')
-    
-    // res
-    // .status(200)
-    // .json({
-    //     'status':'sucess',
-    //     blogs
-    // })
+
     res
     .status(200)
     .render('home',{
-        blogs
+        blogs,
+        tagList 
     })
    }catch(error)
    {

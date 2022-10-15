@@ -52,26 +52,39 @@ a{
 }
 .filter{
     width: 80%;
-    text-align: center;
     margin: 2rem auto;
+    display: flex;
 }
-.filter label{
+.filter p{
     font-size: 1.2rem;
     margin-right: 2rem;
 }
-#tag_filter{
+/* #tag_filter{
     width: 60%;
     padding: 0.5rem 1rem;
     line-height: 1.5rem;
     font-size: 1.1rem;
     border-radius: 2rem;
     text-align: center;
+} */
+.blog__tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.blog__tag{
+    background-color: rgb(227, 11, 92);
+    color: white;
+    font-style: italic;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 .blogs_container{
     display: grid;
     width: 80%;
     margin: 1rem auto;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     row-gap: 4rem;
     column-gap:5rem;
 }

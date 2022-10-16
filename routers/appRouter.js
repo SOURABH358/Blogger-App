@@ -1,6 +1,7 @@
 const express = require('express')
 const userController = require('../controllers/userControllers')
 const blogsControllers = require('../controllers/blogsController')
+const authControllers = require('../controllers/authController')
 const router = express.Router();
 
 router
@@ -14,7 +15,7 @@ router
 
 router
 .route('/blogs')
-.get(blogsControllers.getAllBlogs)
+.get(authControllers.protect, blogsControllers.getAllBlogs)
 .post(blogsControllers.createBlog)
 
 module.exports = router;

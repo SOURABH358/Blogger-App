@@ -30,7 +30,8 @@ exports.signUpUser = async (req,res,next)=>{
         userName: req.body.userName,
         email: req.body.email,
         password: req.body.password,
-        confirmPassword: req.body.confirmPassword
+        confirmPassword: req.body.confirmPassword,
+        passwordChangedAt: new Date(req.body.passwordChangedAt)
     })
     const token = signInToken(user._id)
     res.status(201).json({

@@ -12,6 +12,13 @@ router
 .route('/user/login')
 .post(userController.logInUser)
 
+router
+.route('/login')
+.get()
+
+router
+.route('/signup')
+.get()
 
 router
 .route('/blogs')

@@ -43,6 +43,9 @@ a{
 .tabs li{
     font-size: 1.5rem;
 }
+.authenticate{
+    color: white;
+}
 .account{
     flex-basis: 20%;
     text-align: center;

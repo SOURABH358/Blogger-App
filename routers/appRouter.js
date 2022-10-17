@@ -15,7 +15,7 @@ router
 
 router
 .route('/blogs')
-.get(authControllers.protect, blogsControllers.getAllBlogs)
+.get(blogsControllers.getAllBlogs)
 .post(blogsControllers.createBlog)
 
 module.exports = router;

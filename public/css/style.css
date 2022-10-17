@@ -26,18 +26,19 @@ a{
     background-color: rgb(227, 11, 92);
     display: flex;
     align-items: center;
+    padding: 0 2rem;
 }
 
 .title{
     font-size: 2.5rem;
     flex-basis: 20%;
-    text-align: center;
+    /* text-align: center; */
     color: white;
 }
 .tabs{
-    flex-basis:60%;
+    flex-basis:80%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     color: white;
 }
 .tabs li{
@@ -45,6 +46,22 @@ a{
 }
 .authenticate{
     color: white;
+    display: flex;
+    font-size: 1.25rem;
+}
+.authenticate div{
+    margin: 0 1rem;
+    font-size: 1.5rem;
+}
+
+.authenticate p{
+    padding: 0.25rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+.authenticate p:hover{
+    border: 2px solid white;
 }
 .account{
     flex-basis: 20%;
@@ -188,22 +205,49 @@ hr{
 }
 
 /* log In form  */
-
+.layover{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+}
+.show__layover{
+    display: block;
+}
 .form{
+    position: absolute;
+    left: 50%;
+    top: -100%;
+    background-color: #282C35;
+    transform: translateX(-50%);
     width: 40%;
     height: 70vh;
     min-width: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: auto;
-    margin-top: 6rem;
     color: white;
     padding: 2rem;
     border-radius: 1rem;
     border: 2px solid rgb(227, 11, 92);
     box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.4);
     font-family: Arial, Helvetica, sans-serif;
+    transition: 0.5s ease-in-out;
+    z-index: 999;
+}
+.show__form{
+    top: 5rem;
+}
+.close{
+    position:absolute;
+    top: -2rem;
+    right: -2rem;
+    transform: rotate(45deg);
+    cursor: pointer;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 50%;
 }
 .fields{
     display: flex;

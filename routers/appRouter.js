@@ -14,11 +14,11 @@ router
 
 router
 .route('/login')
-.get()
+.get(userController.logIn)
 
 router
 .route('/signup')
-.get()
+.get(userController.signUp)
 
 router
 .route('/blogs')

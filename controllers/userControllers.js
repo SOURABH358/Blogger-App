@@ -76,3 +76,13 @@ exports.logInUser = async (req,res,next)=>{
     }
 }
 
+exports.signUp = (req,res,next)=>{
+        res.status(200)
+        .render('signup')
+    
+}
+exports.logIn = (req,res,next)=>{
+    res.status(200)
+    .render('logIn')
+
+}

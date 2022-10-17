@@ -4,8 +4,25 @@ const jwt = require('jsonwebtoken')
 
 function signInToken(id){
     return jwt.sign({id}, process.env.JWT_SECURITY_KEY,{
-        expiresIn: process.env.JWT_EXPIRESIN
+        expiresIn: new Date(Date.now() + process.env.JWT_EXPIRESIN*24*60*60*1000),
+        httpOnly : true
     })
+}
+function createSendToken (user, statusCode, res){
+    const token = signInToken(user._id)
+    const cookieOptions = {
+        expires: process.env.JWT_EXPIRESIN_COOKIE
+    }
+    res.cookie('jwt',token, cookieOptions)
+    res.send(statusCode)
+    .json({
+        status: 'success',
+        data : {
+            user
+        }
+    })
+
+
 }
 exports.getUser = (req, res, next) =>{
     try{
@@ -33,11 +50,10 @@ exports.signUpUser = async (req,res,next)=>{
         confirmPassword: req.body.confirmPassword,
         passwordChangedAt: new Date(req.body.passwordChangedAt)
     })
-    const token = signInToken(user._id)
+    createSendToken(user, 201, res)
     res.status(201).json({
         status: 'successful',
-        user,
-        token
+        user
     })
    }catch(err){
     res.status(401).json({
@@ -49,6 +65,7 @@ exports.signUpUser = async (req,res,next)=>{
 
 exports.logInUser = async (req,res,next)=>{
     try{
+        console.log('we are in login')
     const {email, password} = req.body;
 
     if(!email||!password){
@@ -61,11 +78,11 @@ exports.logInUser = async (req,res,next)=>{
     if(!user || !await(user.checkPassword(password, user.password))){
         throw 'Wrong credentials'
     }
-    const token = signInToken(user._id)
+    createSendToken(user, 201, res)
     res.status(200)
     .json({
-        status: 'success',
-        token
+        status: 'success'
+        
     })
     }catch(error){
         res.status(401)
@@ -76,13 +93,3 @@ exports.logInUser = async (req,res,next)=>{
     }
 }
 
-exports.signUp = (req,res,next)=>{
-        res.status(200)
-        .render('signup')
-    
-}
-exports.logIn = (req,res,next)=>{
-    res.status(200)
-    .render('logIn')
-
-}

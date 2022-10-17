@@ -1,13 +1,13 @@
 form#login__form.form
   .close ➕
   p.form__title Login
-  .fields
+  #loginemail.fields
     label(for='email') Email
-    input#loginemail(type='email' placeholder='xyz@gmail.com')
-  .fields
+    input(type='email' placeholder='xyz@gmail.com' autocomplete = false)
+  #loginpassword.fields
     label(for='password') Password
-    input#loginpassword(type='password' placeholder='abc@123')
+    input(type='password' placeholder='abc@123')
   .actions 
     a(href= "/blogger/forgotpassword") forgot password?
     a(href= "/blogger/forgotpassword") sign up
-  button(type='submit') Log In
+  button#login__btn(type='submit') Log In

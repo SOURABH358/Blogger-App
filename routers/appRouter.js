@@ -12,13 +12,7 @@ router
 .route('/user/login')
 .post(userController.logInUser)
 
-router
-.route('/login')
-.get(userController.logIn)
 
-router
-.route('/signup')
-.get(userController.signUp)
 
 router
 .route('/blogs')

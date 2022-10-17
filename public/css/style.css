@@ -183,3 +183,54 @@ hr{
     color: rgb(227, 11, 92);
     background-color: rgb(227, 11, 92);
 }
+
+/* log In form  */
+
+.form{
+    width: 40%;
+    height: 70vh;
+    min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 6rem;
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid rgb(227, 11, 92);
+    box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.4);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.fields{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+.form__title{
+    text-align: center;
+    font-size: 2rem;
+}
+.form input{
+    /* margin: 2rem 0; */
+    height: 2.5rem;
+    text-align: center;
+    border-radius: 0.25rem;
+    border: none;
+}
+.form input:focus{
+    outline: none;
+}
+
+.form button{
+    height: 3rem;
+    border: none;
+    background-color: rgb(227, 11, 92);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: .25rem;
+}
+.signup{
+    height: 80vh;
+}

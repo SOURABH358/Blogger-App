@@ -27,6 +27,13 @@ exports.getHome = (req,res,next)=>{
     res.status(201)
     .render('home')
 }
+exports.getMyBlogs = (req,res,next)=>{
+    const tagList = ['Web development', 'Javascript', 'Programming']
+    res.status(201)
+    .render('myblogs',{
+        tagList
+    })
+}
 exports.createBlog = (req,res, next)=>{
     const {title, content} = req.body;
 

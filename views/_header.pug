@@ -9,10 +9,13 @@ nav.navbar
     li
       a(href='/blogger/myblogs') My Blogs
     li
-      a(href='#') +Create
-    .authenticate 
-      p#login Login 
-      div |
-      p#signup Sign Up
-  //- .account
-  //-   img(src='../images/user.png' alt='user')
+      a(href='/blogger/create') +Create
+    //- .authenticate 
+    //-   p#login Login 
+    //-   div |
+    //-   p#signup Sign Up
+  .account
+    p Jonas
+    div
+      a(href = "http://127.0.0.1:3000/blogger/account")
+        img(src='../images/user.png' alt='user')

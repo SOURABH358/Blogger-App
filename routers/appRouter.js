@@ -17,10 +17,18 @@ router
 router
 .route('/blogs')
 .get(blogsControllers.getAllBlogs)
-.post(blogsControllers.createBlog)
+
+router
+.route('/myblogs')
+.get(blogsControllers.getMyBlogs)
+
 
 router
 .route('/home')
 .get(blogsControllers.getHome)
+
+router
+.route('/account')
+.get(userController.getUser)
 
 module.exports = router;

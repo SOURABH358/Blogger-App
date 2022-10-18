@@ -1,0 +1,28 @@
+extend base
+
+block blogs 
+    main
+        .filter
+            p Search By Tags
+            .blog__tags 
+                each tag in tagList 
+                    a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
+            //- select#tag_filter(name='tags' placehoder='search by tags')
+            //-     option(value=' ' default='')  All
+            //-     option(value='Web development') Web development
+            //-     option(value='Javascript') Javascript
+            //-     option(value='Programming') Programming
+        .blogs_container
+            each blog in blogs
+                .blog_card
+                    .blog_bg
+                        img(src='../images/blog-bg.jpg' alt='blog-bg')
+                    .blog_info
+                        p.blog_title #{blog.title}
+                        .blog_inscript= blog.content.substr(0,100)
+                        .blog_create
+                            div= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
+                            div #{blog.Author}
+                        .tags
+                            each tag in blog.tags 
+                                span #{tag}

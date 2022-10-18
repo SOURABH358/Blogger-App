@@ -9,7 +9,7 @@ exports.getAllBlogs = async (req, res, next) =>{
 
     res
     .status(200)
-    .render('home',{
+    .render('blogs',{
         blogs,
         tagList 
     })
@@ -23,7 +23,10 @@ exports.getAllBlogs = async (req, res, next) =>{
     })
    }
 }
-
+exports.getHome = (req,res,next)=>{
+    res.status(201)
+    .render('home')
+}
 exports.createBlog = (req,res, next)=>{
     const {title, content} = req.body;
 

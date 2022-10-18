@@ -19,4 +19,8 @@ router
 .get(blogsControllers.getAllBlogs)
 .post(blogsControllers.createBlog)
 
+router
+.route('/home')
+.get(blogsControllers.getHome)
+
 module.exports = router;

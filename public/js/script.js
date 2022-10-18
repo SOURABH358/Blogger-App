@@ -1,4 +1,3 @@
-import axios from "axios";
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')
 const signupForm = document.getElementById('signup__form')
@@ -31,6 +30,7 @@ loginButton.addEventListener('submit',async (e)=>{
     const email = document.querySelector('#loginemail input').value
     const password = document.querySelector('#loginpassword input').value
     try{
+        console.log(axios)
         const res = await axios({
             method: 'POST',
             url: 'http://127.0.0.1:3000/blogger/user/login',

@@ -28,6 +28,10 @@ router
 .get(blogsControllers.getHome)
 
 router
+.route('/create')
+.get(blogsControllers.newBlog)
+
+router
 .route('/account')
 .get(userController.getUser)
 

@@ -28,11 +28,15 @@ exports.getHome = (req,res,next)=>{
     .render('home')
 }
 exports.getMyBlogs = (req,res,next)=>{
-    const tagList = ['Web development', 'Javascript', 'Programming']
+    const tagList = []
     res.status(201)
     .render('myblogs',{
         tagList
     })
+}
+exports.newBlog = (req,res,next)=>{
+    res.status(201)
+    .render('create')
 }
 exports.createBlog = (req,res, next)=>{
     const {title, content} = req.body;

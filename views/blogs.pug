@@ -7,11 +7,7 @@ block blogs
             .blog__tags 
                 each tag in tagList 
                     a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
-            //- select#tag_filter(name='tags' placehoder='search by tags')
-            //-     option(value=' ' default='')  All
-            //-     option(value='Web development') Web development
-            //-     option(value='Javascript') Javascript
-            //-     option(value='Programming') Programming
+            
         .blogs_container
             each blog in blogs
                 .blog_card

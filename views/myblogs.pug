@@ -2,15 +2,13 @@ extends base
 
 block myblogs
     main
-        h1 My Blogs
-        .filter
-            p Search By Tags
-            .blog__tags 
-                each tag in tagList 
-                    a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
-            //- select#tag_filter(name='tags' placehoder='search by tags')
-            //-     option(value=' ' default='')  All
-            //-     option(value='Web development') Web development
-            //-     option(value='Javascript') Javascript
-            //-     option(value='Programming') Programming
-        .blogs_container 
+        section.myblogs 
+            h1 My Blogs
+            .filter
+                p Search By Tags
+                .blog__tags 
+                    each tag in tagList 
+                        a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
+                
+            .myblogs__container 
+                div You do not have any blogs

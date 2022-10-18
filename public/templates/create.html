@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Blogger</title>
 </head>
+
 <body>
-    
+    <nav class="navbar">
+        <div class="title">
+            Blogger
+        </div>
+        <ul class="tabs">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blogs</a></li>
+            <li><a href="#">My Blogs</a></li>
+            <li><a href="#">+Create</a></li>
+        </ul>
+        <div class="account">
+            <img src="../images/user.png" alt="user" />
+        </div>
+    </nav>
+    <main>
+        <section class="create__form">
+            <h1>New Blog</h1>
+            <form id="create__form">
+                <div>
+                    <input id="title" type="text" placeholder="Title" required />
+                </div>
+                <div>
+                    <input id="tags" type="text" placeholder="Tags : blogging, web" required />
+                </div>
+                <div>
+                    <input id="image" type="text" placeholder="Upload Image" required />
+                </div>
+                <div>
+                    <textarea id="content" placeholder="Your Content" required></textarea>
+                </div>
+
+                <button type="submit" id="publish">Publish</button>
+            </form>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>Made with ❤ by Sourabh Yadav</p>
+        <div>
+            <p>Follow me on</p>
+            <div class="social__links">
+                <p><a href="#"><img src="https://img.icons8.com/ios-glyphs/30/000000/twitter--v1.png" /></a></p>
+                <p><a href="#"><img src="https://img.icons8.com/ios-glyphs/30/000000/github.png" /></a></p>
+                <p><a href="#"><img src="https://img.icons8.com/ios-glyphs/30/000000/linkedin-circled--v1.png" /></a>
+                </p>
+            </div>
+        </div>
+        <p>©copyright All rights reserved</p>
+    </footer>
 </body>
+
 </html>

@@ -28,6 +28,7 @@ a{
     display: flex;
     align-items: center;
     padding: 0 2rem;
+    /* box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.4); */
 }
 
 .title{
@@ -178,6 +179,25 @@ a{
 
 /* user page */
 
+.update__links{
+    position: fixed;
+    top: 6rem;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    gap: 2rem;
+    padding: 2rem 0;
+    z-index: 0;
+}
+.update__links a{
+    padding: 1rem 2rem;
+    border-radius: 0.25rem;
+}
+.update__links a:hover{
+    background-color: rgb(227, 11, 92);
+}
 .user_container{
     width: 50%;
     margin: 4rem auto;
@@ -188,6 +208,9 @@ a{
 .user_pic{
     height: 10vw;
     text-align: center;
+    border-bottom: 2px solid white;
+    width: 90%;
+    margin: auto;
 }
 .user_photo{
     width: 9rem;
@@ -197,14 +220,17 @@ a{
     background-color: lightblue;
 }
 .user_info{
-    padding: 2rem;
+    width: 90%;
+    margin: auto;
+    padding: 4rem 0;
 }
 .user_details{
     display: grid;
-    grid-template-columns: 1fr 7fr;
+    grid-template-columns: 1fr 5fr;
     font-size: 1.2rem;
-    column-gap: 2rem;
+    column-gap: 4rem;
     margin-bottom: 3rem;
+    color: white;
 }
 .user_details p:nth-child(2)
 {

@@ -28,6 +28,7 @@ a{
     display: flex;
     align-items: center;
     padding: 0 2rem;
+    z-index: 999;
     /* box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.4); */
 }
 
@@ -179,8 +180,15 @@ a{
 
 /* user page */
 
+.user_container{
+    width: 50%;
+    margin: 4rem auto;
+    padding: 2rem 1rem;
+    border: 2px solid rgb(227, 11, 92);
+    border-radius: 2rem;
+}
 .update__links{
-    position: fixed;
+    position: absolute;
     top: 6rem;
     left: 0;
     height: 100vh;
@@ -189,7 +197,6 @@ a{
     background-color: black;
     gap: 2rem;
     padding: 2rem 0;
-    z-index: 0;
 }
 .update__links a{
     padding: 1rem 2rem;
@@ -198,13 +205,7 @@ a{
 .update__links a:hover{
     background-color: rgb(227, 11, 92);
 }
-.user_container{
-    width: 50%;
-    margin: 4rem auto;
-    padding: 2rem 1rem;
-    border: 2px solid rgb(227, 11, 92);
-    border-radius: 2rem;
-}
+
 .user_pic{
     height: 10vw;
     text-align: center;

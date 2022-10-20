@@ -5,13 +5,22 @@ const {promisify} = require('util')
 
 exports.protect = async (req,res,next)=>{
     try{
+        let token;
         // 1) jwt exists
-    if(!req.headers.authorization || !req.headers.authorization.startsWith('Bearer'))
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer'))
+    {
+
+        
+        token = req.headers.authorization.split(" ")[1];
+    }
+    else if(req.cookie.jwt){
+        token = req.cookie.jwt
+    }
+    if(!token)
     {
         throw 'You are not logged in, Please log in'
     }
     // 2) verify jwt
-    const token = req.headers.authorization.split(" ")[1];
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECURITY_KEY)
 
     

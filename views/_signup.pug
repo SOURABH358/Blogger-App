@@ -1,16 +1,16 @@
 form#signup__form.form.signup
   .close ➕
   p.form__title Sign Up
-  .fields
-    label(for='Name') Password
-    input#name(type='text' placeholder='Jonas')
-  .fields
-    label(for='email') Email
-    input#signupemail(type='email' placeholder='xyz@gmail.com')
-  .fields
+  #name.fields
+    label(for='Name') Name
+    input(type='text' placeholder='Jonas' name = "Name")
+  #signupemail.fields
+    label(for='Email') Email
+    input(type='email' placeholder='xyz@gmail.com' name = "Email")
+  #signuppassword.fields
     label(for='password') Password
-    input#signuppassword(type='password' placeholder='abc@123')
-  .fields
+    input(type='password' placeholder='abc@123' name = "password")
+  #confirm_password.fields
     label(for='confirm_password') Confirm Password
-    input#confirm_password(type='password' placeholder='abc@123')
+    input(type='password' placeholder='abc@123' name = "confirm_password")
   button#signup__btn(type='submit') Sign Up

@@ -1,21 +1,17 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  link(rel='stylesheet' href='/css/style.css')
-  title Blogger App | Create your own blogs
-body 
-  include _login
-  include _signup
-  .layover
-  include _header
-  block home 
-  block blogs 
-  block myblogs
-  block content
-  block create
-  block account
-  include _footer
-script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js")
-script(type = "module" src="../js/script.js")   
+html
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='/css/style.css')
+    title Blogger App | Create your own blogs
+  body 
+    include _header
+    include _login
+    include _signup
+    .layover
+    block content 
+    include _footer
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js") 
+    script(type = "module" src="/js/script.js")   

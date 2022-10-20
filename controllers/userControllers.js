@@ -4,19 +4,21 @@ const jwt = require('jsonwebtoken')
 
 function signInToken(id){
     return jwt.sign({id}, process.env.JWT_SECURITY_KEY,{
-        expiresIn: new Date(Date.now() + process.env.JWT_EXPIRESIN*24*60*60*1000),
-        httpOnly : true
+        expiresIn: '90d'
+       
     })
 }
 function createSendToken (user, statusCode, res){
     const token = signInToken(user._id)
     const cookieOptions = {
-        expires: process.env.JWT_EXPIRESIN_COOKIE
+        expires: new Date(Date.now() + process.env.JWT_EXPIRESIN_COOKIE*24*60*60*1000),
+        httpOnly : true
     }
     res.cookie('jwt',token, cookieOptions)
-    res.send(statusCode)
+    res.status(statusCode)
     .json({
         status: 'success',
+        token,
         data : {
             user
         }
@@ -47,14 +49,17 @@ exports.signUpUser = async (req,res,next)=>{
         userName: req.body.userName,
         email: req.body.email,
         password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-        passwordChangedAt: new Date(req.body.passwordChangedAt)
+        confirmPassword: req.body.confirmPassword
     })
-    createSendToken(user, 201, res)
-    res.status(201).json({
-        status: 'successful',
+    // createSendToken(user, 201, res)
+    const token = signInToken(user._id)
+    res.status(201)
+    .json({
+        status: 'success',
+        token, 
         user
     })
+    
    }catch(err){
     res.status(401).json({
         status: 'failure',
@@ -79,11 +84,7 @@ exports.logInUser = async (req,res,next)=>{
         throw 'Wrong credentials'
     }
     createSendToken(user, 201, res)
-    res.status(200)
-    .json({
-        status: 'success'
-        
-    })
+    
     }catch(error){
         res.status(401)
         .json({

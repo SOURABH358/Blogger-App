@@ -29,7 +29,7 @@ function createSendToken (user, statusCode, res){
 exports.getUser = (req, res, next) =>{
     try{
         res
-    .status(200)
+    .status(201)
     .render('user')
     }catch(error){
         res

@@ -1,5 +1,8 @@
 extends base
 
-block content 
-    h1 Oops! Looks like something went wrong
-    p #{message}
+block content
+    main
+        .error_container 
+            h1 Oops! Looks like something went wrong
+            p #{message}
+            a(href = "http://127.0.0.1:3000/blogger/home") Go to home

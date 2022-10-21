@@ -26,6 +26,9 @@ router
 .route('/myblogs')
 .get(authControllers.protect, blogsControllers.getMyBlogs)
 
+router
+.route('/')
+.get(blogsControllers.getHome)
 
 router
 .route('/home')

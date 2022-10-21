@@ -51,31 +51,30 @@ exports.signUpUser = async (req,res,next)=>{
         password: req.body.password,
         confirmPassword: req.body.confirmPassword
     })
-    // createSendToken(user, 201, res)
-    const token = signInToken(user._id)
-    res.status(201)
-    .json({
-        status: 'success',
-        token, 
-        user
-    })
+    createSendToken(user, 201, res)
+    // const token = signInToken(user._id)
+    // res.status(201)
+    // .json({
+    //     status: 'success',
+    //     token, 
+    //     user
+    // })
     
    }catch(err){
     res.status(401).json({
         status: 'failure',
-        err
+        message: err.message
     })
    }
 }
 
 exports.logInUser = async (req,res,next)=>{
     try{
-        console.log('we are in login')
     const {email, password} = req.body;
 
     if(!email||!password){
         
-        throw 'please prvide email and password';
+        throw 'please provide email and password';
     }
 
     const user = await userModel.findOne({email}).select('+password')

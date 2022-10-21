@@ -13,6 +13,7 @@ router
 .post(userController.logInUser)
 
 
+router.use(authControllers.isLoggedIn)
 
 router
 .route('/blogs')
@@ -20,7 +21,7 @@ router
 
 router
 .route('/myblogs')
-.get(blogsControllers.getMyBlogs)
+.get(authControllers.protect, blogsControllers.getMyBlogs)
 
 
 router
@@ -29,10 +30,10 @@ router
 
 router
 .route('/create')
-.get(blogsControllers.newBlog)
+.get(authControllers.protect, blogsControllers.newBlog)
 
 router
 .route('/account')
-.get(userController.getUser)
+.get(authControllers.protect, userController.getUser)
 
 module.exports = router;

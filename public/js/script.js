@@ -1,11 +1,22 @@
-
-console.log(axios)
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')
 const signupForm = document.getElementById('signup__form')
 const loginForm = document.getElementById('login__form')
 const layover = document.querySelector('.layover')
 const close = document.querySelectorAll('.close')
+
+
+function hideAlert (){
+    const alert = document.querySelector('.alert')
+    document.body.removeChild(alert)
+}
+function showAlert (type, message){
+    const alert = document.createElement("div")
+    alert.innerText = message;
+    alert.classList.add(`alert`)
+    alert.classList.add(type)
+    document.body.appendChild(alert)
+}
 
 signup.addEventListener('click', () => {
     signupForm.classList.add('show__form')
@@ -39,12 +50,21 @@ loginForm.addEventListener('submit', async (e) => {
             }
         })
         if (res.data.status === 'success') {
-            alert('success')
-            location.assign('/blogger/blogs')
+            showAlert('success', 'Logged In Successfully')
+            loginForm.classList.remove('show__form')
+            layover.classList.remove('show__layover')
+            window.setTimeout(() => {
+                hideAlert();
+                location.assign('/blogger/home')
+                
+            }, 1500)
         }
     } catch (error) {
-        alert(error)
-
+        console.log(error)
+        showAlert('error', error.response.data.error)
+        window.setTimeout(()=>{
+            hideAlert();
+        },1500)
     }
 
 })
@@ -68,10 +88,18 @@ signupForm.addEventListener('submit', async (e) => {
             }
         })
         if (res.data.status === 'success') {
-            alert('success')
-            location.assign('/blogger/home')
+            showAlert('success', 'Signed In Successfully')
+            signupForm.classList.remove('show__form')
+            layover.classList.remove('show__layover')
+            window.setTimeout(() => {
+                hideAlert();
+                location.assign('/blogger/home')
+            }, 1500);
         }
     } catch (error) {
-        console.log(error)
+        showAlert('error', error.response.data.message)
+        window.setTimeout(()=>{
+            hideAlert()
+        },1500)
     }
 })

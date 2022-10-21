@@ -13,8 +13,8 @@ exports.protect = async (req,res,next)=>{
         
         token = req.headers.authorization.split(" ")[1];
     }
-    else if(req.cookie.jwt){
-        token = req.cookie.jwt
+    else if(req.cookies.jwt){
+        token = req.cookies.jwt
     }
     if(!token)
     {
@@ -47,6 +47,33 @@ exports.protect = async (req,res,next)=>{
         })
     }
 }
+
+exports.isLoggedIn = async (req,res,next)=>{
+    // 1) verify token
+    if(req.cookies.jwt){
+   
+    // 2) verify jwt
+    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECURITY_KEY)
+
+    
+    // 3) user still exist
+    const user = await userModels.findById(decoded.id)
+
+    if(!user){
+        return next();
+    }
+    // 4) has the password be changed after jwt
+    if(user.changedPassword(decoded.iat))
+    {
+        return next();
+    }
+    // user is logged in
+    res.locals.user = user;
+    return next();
+    }
+    next();
+}
+
 exports.forgotPassword = async (req,res, next)=>{
     // 1) get the user
     const user = await userModels.findOne({email: req.body.email})

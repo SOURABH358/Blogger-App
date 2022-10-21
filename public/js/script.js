@@ -4,8 +4,9 @@ const signupForm = document.getElementById('signup__form')
 const loginForm = document.getElementById('login__form')
 const layover = document.querySelector('.layover')
 const close = document.querySelectorAll('.close')
+const logOut = document.querySelector('.update__links .logOut')
 
-
+console.log(logOut)
 function hideAlert (){
     const alert = document.querySelector('.alert')
     document.body.removeChild(alert)
@@ -18,15 +19,22 @@ function showAlert (type, message){
     document.body.appendChild(alert)
 }
 
-signup.addEventListener('click', () => {
-    signupForm.classList.add('show__form')
-    layover.classList.add('show__layover')
-})
+if(signup){
 
-login.addEventListener('click', () => {
-    loginForm.classList.add('show__form')
-    layover.classList.add('show__layover')
-})
+    signup.addEventListener('click', () => {
+        signupForm.classList.add('show__form')
+        layover.classList.add('show__layover')
+    })
+}
+if(login){
+    login.addEventListener('click', () => {
+        loginForm.classList.add('show__form')
+        layover.classList.add('show__layover')
+    })
+
+}
+
+
 
 close.forEach(ele => {
     ele.addEventListener('click', () => {
@@ -38,9 +46,9 @@ close.forEach(ele => {
 
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault()
-    const email = document.querySelector('#loginemail input').value
-    const password = document.querySelector('#loginpassword input').value
     try {
+        const email = document.querySelector('#loginemail input').value
+        const password = document.querySelector('#loginpassword input').value
         const res = await axios({
             method: 'POST',
             url: 'http://127.0.0.1:3000/blogger/user/login',
@@ -56,7 +64,6 @@ loginForm.addEventListener('submit', async (e) => {
             window.setTimeout(() => {
                 hideAlert();
                 location.assign('/blogger/home')
-                
             }, 1500)
         }
     } catch (error) {
@@ -101,5 +108,23 @@ signupForm.addEventListener('submit', async (e) => {
         window.setTimeout(()=>{
             hideAlert()
         },1500)
+    }
+})
+
+logOut.addEventListener('click',async ()=>{
+    try{
+        const res = await axios({
+            method: 'GET',
+            url : 'http://127.0.0.1:3000/blogger/user/logout',
+        })
+        if(res.data.status === 'success'){
+            showAlert('success','User successfully logged Out!');
+            window.setTimeout(() => {
+                hideAlert();
+                location.assign('/blogger/home')
+            }, 1500);
+        }
+    }catch(error){
+
     }
 })

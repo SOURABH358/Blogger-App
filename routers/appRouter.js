@@ -12,6 +12,9 @@ router
 .route('/user/login')
 .post(userController.logInUser)
 
+router
+.route('/user/logout')
+.get(userController.logOut)
 
 router.use(authControllers.isLoggedIn)
 

@@ -92,4 +92,10 @@ exports.logInUser = async (req,res,next)=>{
         })
     }
 }
-
+exports.logOut = async (req,res,next)=>{
+    res.cookie('jwt','loggedout',{
+            expires: new Date(Date.now() + 1000),
+            httpOnly: true
+    })
+    res.status(201).json({status: 'success'})
+}

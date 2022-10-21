@@ -7,6 +7,7 @@ exports.getAllBlogs = async (req, res, next) =>{
     const tagList = [...new Set(newList)]
     const blogs = await blogModels.find(req.query).select('-__v').sort('-createdAt')
 
+    res.locals.current = 'blogs';
     res
     .status(200)
     .render('blogs',{
@@ -24,10 +25,12 @@ exports.getAllBlogs = async (req, res, next) =>{
    }
 }
 exports.getHome = (req,res,next)=>{
+    res.locals.current = 'home';
     res.status(201)
     .render('home')
 }
 exports.getMyBlogs = (req,res,next)=>{
+    res.locals.current = 'myBlogs';
     const tagList = []
     res.status(201)
     .render('myblogs',{
@@ -35,6 +38,8 @@ exports.getMyBlogs = (req,res,next)=>{
     })
 }
 exports.newBlog = (req,res,next)=>{
+    
+    res.locals.current = 'create';
     res.status(201)
     .render('create')
 }

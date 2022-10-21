@@ -54,6 +54,7 @@ a{
     width: 20%;
     /* text-align: center; */
     color: white;
+    text-shadow: 16px 16px 16px rgba(0,0,0,0.4);
 }
 .tabs{
     width: 60%;
@@ -63,6 +64,14 @@ a{
 }
 .tabs li{
     font-size: 1.25rem;
+    /* text-shadow: 
+    8px 8px 8px rgba(0,0,0,0.4); */
+}
+
+.highlight{
+    border-bottom: 4px solid white;
+    /* text-shadow: 
+    8px 8px 8px rgba(0,0,0,0.4); */
 }
 .authenticate{
     width: 20%;

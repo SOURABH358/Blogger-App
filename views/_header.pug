@@ -3,13 +3,13 @@ nav.navbar
     | Blogger
   ul.tabs
     li
-      a(href='/blogger/home') Home
+      a(href='/blogger/home' class= current==='home'?"highlight":"") Home
     li
-      a(href='/blogger/blogs') Blogs
+      a(href='/blogger/blogs' class= current==='blogs'?"highlight":"") Blogs
     li
-      a(href='/blogger/myblogs') My Blogs
+      a(href='/blogger/myblogs' class= current==='myBlogs'?"highlight":"") My Blogs
     li
-      a(href='/blogger/create') +Create
+      a(href='/blogger/create' class= current==='create'?"highlight":"") +Create
   if user
     .account
       p= user.userName.split(" ")[0]

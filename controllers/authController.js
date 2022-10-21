@@ -41,9 +41,8 @@ exports.protect = async (req,res,next)=>{
     catch(error)
     {
         res.status(401)
-        .json({
-            status: 'failure',
-            error
+        .render('error', {
+            message: error
         })
     }
 }

@@ -538,3 +538,57 @@ hr{
 .error_container a{
     color: lightblue;
 }
+
+/* user update form */
+
+#user_info_form{
+    position: absolute;
+    left: 50%;
+    top: 5rem;
+    background-color: #282C35;
+    transform: translateX(-50%);
+    width: 40%;
+    min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: space-between;
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid rgb(227, 11, 92);
+    box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.4);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.5s ease-in-out;
+    z-index: 999;
+}
+#user_info_form h1{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: normal;
+}
+#user_info_form div{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 1rem;
+}
+#user_info_form input{
+    /* margin: 2rem 0; */
+    height: 2.5rem;
+    text-align: center;
+    border-radius: 0.25rem;
+    border: none;
+}
+#user_info_form input:focus{
+    outline: none;
+}
+
+#user_info_form button{
+    height: 3rem;
+    border: none;
+    background-color: rgb(227, 11, 92);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: .25rem;
+}

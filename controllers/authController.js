@@ -108,6 +108,10 @@ exports.resetPassword = (req,res,next)=>{
             throw 'token is invalid or has expired, please try again'
         }
         // 2) change the password 
+        if(req.body.password!= req.body.confirmPassword)
+        {
+            throw 'password and confirm password do not match, please try again';
+        }
         user.password = req.body.password;
         user.confirmPassword = req.body.confirmPassword;
         user.resetToken = undefined;

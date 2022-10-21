@@ -31,6 +31,14 @@ const userSchema = mongoose.Schema({
             Message: 'password and confirm password do not match!'
         }
     },
+    website: String,
+    country: String, 
+    state: String, 
+    city: String,
+    linkedin: String, 
+    twitter: String, 
+    instagram: String,
+    github: String,
     passwordChangedAt: Date,
     resetToken: String,
     resetTokenExpiration: Date

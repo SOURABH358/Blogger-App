@@ -42,4 +42,8 @@ router
 .route('/account')
 .get(authControllers.protect, userController.getUser)
 
+router
+.route('/updateuser')
+.patch(authControllers.protect, userController.updateUser)
+
 module.exports = router;

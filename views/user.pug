@@ -13,33 +13,33 @@ block content
         .user_photo
       .user_info
         .user_details
-          p Name
-          p Jonas
+          p UserName
+          p= user.userName
         .user_details
-          p Email 
-          p Jonasxyz@gmail.com
+          p Email
+          p= user.email
         .user_details
           p Website 
-          p xyz.com
+          p= user.website?user.website:'xyz.com'
         .user_details
           p Country 
-          p USA
+          p= user.country?user.country: 'USA'
         .user_details
           p State 
-          p Los Angeles
+          p= user.state?user.state: 'California'
         .user_details
           p City 
-          p xyz
+          p= user.city?user.city: 'Los Angeles'
         .user_details
           p Linked In 
-          p xyz@linkedin.com
+          p= user.linkedin?user.linkedin: 'xyz@linkedin.com'
         .user_details
           p Twitter
-          p xyz@twitter.com
+          p= user.twitter?user.twitter: 'xyz@twitter.com'
         .user_details
           p Instagram
-          p xyz@instagram.com
+          p= user.instagram?user.instagram: 'xyz@instagram.com'
         .user_details
           p GitHub 
-          p xyz@github.com
+          p= user.gihub?user.github: 'xyz@github.com'
 

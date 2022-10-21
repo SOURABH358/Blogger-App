@@ -45,7 +45,6 @@ a{
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    z-index: 999;
     /* box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.4); */
 }
 
@@ -275,6 +274,7 @@ hr{
 
 /* log In form  */
 .layover{
+    top: 0;
     width: 100%;
     height: 100vh;
     position: fixed;
@@ -305,9 +305,7 @@ hr{
     transition: 0.5s ease-in-out;
     z-index: 999;
 }
-.show__form{
-    top: 5rem;
-}
+
 .close{
     position:absolute;
     top: -2rem;
@@ -411,7 +409,6 @@ hr{
     background-color: rgb(227, 11, 92);
     color: black;
     text-align: center;
-    z-index: 999;
 }
 .footer .social__links{
     display: flex;
@@ -541,10 +538,10 @@ hr{
 
 /* user update form */
 
-#user_info_form{
+.user_info_form{
     position: absolute;
     left: 50%;
-    top: 5rem;
+    top: -200%;
     background-color: #282C35;
     transform: translateX(-50%);
     width: 40%;
@@ -562,28 +559,28 @@ hr{
     transition: 0.5s ease-in-out;
     z-index: 999;
 }
-#user_info_form h1{
+.user_info_form h1{
     text-align: center;
     font-size: 2.5rem;
     font-weight: normal;
 }
-#user_info_form div{
+.user_info_form div{
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 4fr;
     row-gap: 1rem;
 }
-#user_info_form input{
+.user_info_form input{
     /* margin: 2rem 0; */
     height: 2.5rem;
     text-align: center;
     border-radius: 0.25rem;
     border: none;
 }
-#user_info_form input:focus{
+.user_info_form input:focus{
     outline: none;
 }
 
-#user_info_form button{
+.user_info_form button{
     height: 3rem;
     border: none;
     background-color: rgb(227, 11, 92);
@@ -591,4 +588,8 @@ hr{
     font-size: 1.1rem;
     cursor: pointer;
     border-radius: .25rem;
+}
+
+.show__form{
+    top: 5rem;
 }

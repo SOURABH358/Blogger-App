@@ -5,13 +5,15 @@ const loginForm = document.getElementById('login__form')
 const layover = document.querySelector('.layover')
 const close = document.querySelectorAll('.close')
 const logOut = document.querySelector('.update__links .logOut')
+const changeInfo = document.querySelector('.changeInfo')
+const userInfoForm = document.querySelector('.user_info_form')
 
 console.log(logOut)
-function hideAlert (){
+function hideAlert() {
     const alert = document.querySelector('.alert')
     document.body.removeChild(alert)
 }
-function showAlert (type, message){
+function showAlert(type, message) {
     const alert = document.createElement("div")
     alert.innerText = message;
     alert.classList.add(`alert`)
@@ -19,20 +21,24 @@ function showAlert (type, message){
     document.body.appendChild(alert)
 }
 
-if(signup){
+if (signup) {
 
     signup.addEventListener('click', () => {
         signupForm.classList.add('show__form')
         layover.classList.add('show__layover')
     })
 }
-if(login){
+if (login) {
     login.addEventListener('click', () => {
         loginForm.classList.add('show__form')
         layover.classList.add('show__layover')
     })
 
 }
+changeInfo.addEventListener('click', () => {
+    userInfoForm.classList.add('show__form')
+    layover.classList.add('show__layover')
+})
 
 
 
@@ -40,6 +46,7 @@ close.forEach(ele => {
     ele.addEventListener('click', () => {
         signupForm.classList.remove('show__form')
         loginForm.classList.remove('show__form')
+        userInfoForm.classList.remove('show__form')
         layover.classList.remove('show__layover')
     })
 })
@@ -69,9 +76,9 @@ loginForm.addEventListener('submit', async (e) => {
     } catch (error) {
         console.log(error)
         showAlert('error', error.response.data.error)
-        window.setTimeout(()=>{
+        window.setTimeout(() => {
             hideAlert();
-        },1500)
+        }, 1500)
     }
 
 })
@@ -105,26 +112,27 @@ signupForm.addEventListener('submit', async (e) => {
         }
     } catch (error) {
         showAlert('error', error.response.data.message)
-        window.setTimeout(()=>{
+        window.setTimeout(() => {
             hideAlert()
-        },1500)
+        }, 1500)
     }
 })
 
-logOut.addEventListener('click',async ()=>{
-    try{
+logOut.addEventListener('click', async () => {
+    try {
         const res = await axios({
             method: 'GET',
-            url : 'http://127.0.0.1:3000/blogger/user/logout',
+            url: 'http://127.0.0.1:3000/blogger/user/logout',
         })
-        if(res.data.status === 'success'){
-            showAlert('success','User successfully logged Out!');
+        if (res.data.status === 'success') {
+            showAlert('success', 'User successfully logged Out!');
             window.setTimeout(() => {
                 hideAlert();
                 location.assign('/blogger/home')
             }, 1500);
         }
-    }catch(error){
+    } catch (error) {
 
     }
 })
+

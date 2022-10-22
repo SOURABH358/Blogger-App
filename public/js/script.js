@@ -11,7 +11,7 @@ const userInfoForm = document.querySelector('.user_info')
 const deleteAccount = document.querySelector('.update__links .delete')
 const changedPasswordForm = document.getElementById('change_password')
 const changePassword = document.querySelector('.update__links .ChangePassword')
-const publish = document.querySelector('#publish')
+const createForm = document.querySelector('#create__form')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -245,5 +245,39 @@ changedPasswordForm.addEventListener('submit',async (e)=>{
         window.setTimeout(() => {
             hideAlert();
         }, 1500);
+    }
+})
+
+createForm.addEventListener('submit',async (e)=>{
+    e.preventDefault();
+    try{
+        const title = document.getElementById('title').value
+        const tags = document.getElementById('tags').value
+        const hero = document.getElementById('image').value
+        const content = document.getElementById('content').value
+        const res = await axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:3000/blogger/user/createblog',
+            data:{
+                title,
+                tags,
+                hero,
+                content
+            }
+        })
+        if(res.data.status === 'success')
+        {
+            showAlert('success', 'Blog published successfully!')
+            window.setTimeout(()=>{
+                hideAlert();
+                location.assign('/blogger/create')
+            },1500)
+        }
+    }catch(error)
+    {
+        showAlert('error', error)
+        window.setTimeout(()=>{
+            hideAlert();
+        },1500)
     }
 })

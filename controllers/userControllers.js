@@ -122,9 +122,21 @@ exports.updateUser = async (req, res, next) => {
     }
 }
 exports.deleteUser = async (req, res, next) =>{
-    await userModel.deleteOne(req.user.id);
-    res.status(201)
-    .json({
-        status: 'success'
-    })
+    try{
+        res.cookie('jwt', 'loggedout', {
+            expires: new Date(Date.now() + 1000),
+            httpOnly: true
+        })
+        await userModel.findByIdAndDelete(req.user.id);
+        res.status(201)
+        .json({
+            status: 'success'
+        })
+    }
+    catch (error) {
+        res.status(401)
+            .render('error', {
+                message: error
+            })
+    }
 }

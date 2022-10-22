@@ -8,7 +8,7 @@ const close = document.querySelectorAll('.close')
 const logOut = document.querySelector('.update__links .logOut')
 const changeInfo = document.querySelector('.changeInfo')
 const update = document.querySelector('#update')
-const deleteAccount = document.querySelector('.delete')
+const deleteAccount = document.querySelector('.update__links .delete')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -40,18 +40,31 @@ if (login) {
 //     userInfoForm.classList.add('show__form')
 //     layover.classList.add('show__layover')
 // })
+if(deleteAccount){
 
-deleteAccount.addEventListener('click',async ()=>{
-    try{
-        const res = await axios({
-            method: 'DELETE',
-            url: 'http://127.0.0.1:3000/blogger/user/deleteuser'
-        })
-    }catch(error)
-    {
-        
-    }
-})
+    deleteAccount.addEventListener('click',async ()=>{
+        try{
+            const res = await axios({
+                method: 'DELETE',
+                url: 'http://127.0.0.1:3000/blogger/user/deleteuser'
+            })
+            if(res.data.status = 'success')
+            {
+                showAlert('success', 'User successfully deleted!')
+                window.setTimeout(()=>{
+                    hideAlert();
+                    location.assign('/blogger/home')
+                },1500)
+            }
+        }catch(error)
+        {
+            showAlert('error', error.response.data.error)
+            window.setTimeout(() => {
+                hideAlert();
+            }, 1500)
+        }
+    })
+}
 
 close.forEach(ele => {
     ele.addEventListener('click', () => {
@@ -85,7 +98,6 @@ loginForm.addEventListener('submit', async (e) => {
             }, 1500)
         }
     } catch (error) {
-        console.log(error)
         showAlert('error', error.response.data.error)
         window.setTimeout(() => {
             hideAlert();
@@ -153,22 +165,21 @@ update.addEventListener('click',async (e)=>{
     try{
         const userName = document.querySelector('#userName input').value
         const website = document.querySelector('#website input').value
-        // const country = document.querySelector('.country input').value
-        // const state = document.querySelector('.state input').value
-        // const city = document.querySelector('.city input').value
-        // const website = document.querySelector('.website input').value
-        // const linkedin = document.querySelector('.linkedin input').value
-        // const twitter = document.querySelector('.twitter input').value
-        // const instagram = document.querySelector('.instagram input').value
-        // const github = document.querySelector('.github input').value
+        const country = document.querySelector('.country input').value
+        const state = document.querySelector('.state input').value
+        const city = document.querySelector('.city input').value
+        const linkedin = document.querySelector('.linkedin input').value
+        const twitter = document.querySelector('.twitter input').value
+        const instagram = document.querySelector('.instagram input').value
+        const github = document.querySelector('.github input').value
 
         const res = await axios({
             method: 'PATCH',
             url: 'http://127.0.0.1:3000/blogger/user/updateuser',
             data:{
-                userName,website
+                userName,website,country,state,city,linkedin,twitter, instagram, github
             }
-            // country,state,city,linkedin,twitter, instagram, github
+            
         })
         if(res.data.status === 'success')
         {

@@ -48,6 +48,6 @@ router
 
 router
 .route('/user/deleteuser')
-.delete(userController.deleteUser)
+.delete(authControllers.protect, userController.deleteUser)
 
 module.exports = router;

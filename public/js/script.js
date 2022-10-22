@@ -1,3 +1,4 @@
+
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')
 const signupForm = document.getElementById('signup__form')
@@ -6,7 +7,7 @@ const layover = document.querySelector('.layover')
 const close = document.querySelectorAll('.close')
 const logOut = document.querySelector('.update__links .logOut')
 const changeInfo = document.querySelector('.changeInfo')
-const userInfoForm = document.querySelector('.user_info_form')
+const update = document.querySelector('#update')
 
 console.log(logOut)
 function hideAlert() {
@@ -35,10 +36,10 @@ if (login) {
     })
 
 }
-changeInfo.addEventListener('click', () => {
-    userInfoForm.classList.add('show__form')
-    layover.classList.add('show__layover')
-})
+// changeInfo.addEventListener('click', () => {
+//     userInfoForm.classList.add('show__form')
+//     layover.classList.add('show__layover')
+// })
 
 
 
@@ -46,7 +47,7 @@ close.forEach(ele => {
     ele.addEventListener('click', () => {
         signupForm.classList.remove('show__form')
         loginForm.classList.remove('show__form')
-        userInfoForm.classList.remove('show__form')
+        // userInfoForm.classList.remove('show__form')
         layover.classList.remove('show__layover')
     })
 })
@@ -136,3 +137,42 @@ logOut.addEventListener('click', async () => {
     }
 })
 
+update.addEventListener('click',async (e)=>{
+    e.preventDefault();
+
+    try{
+        const userName = document.querySelector('#userName input').value
+        const website = document.querySelector('#website input').value
+        // const country = document.querySelector('.country input').value
+        // const state = document.querySelector('.state input').value
+        // const city = document.querySelector('.city input').value
+        // const website = document.querySelector('.website input').value
+        // const linkedin = document.querySelector('.linkedin input').value
+        // const twitter = document.querySelector('.twitter input').value
+        // const instagram = document.querySelector('.instagram input').value
+        // const github = document.querySelector('.github input').value
+
+        const res = await axios({
+            method: 'PATCH',
+            url: 'http://127.0.0.1:3000/blogger/updateuser',
+            data:{
+                userName,website
+            }
+            // country,state,city,linkedin,twitter, instagram, github
+        })
+        if(res.data.status === 'success')
+        {
+            showAlert('success', 'Data Updated Successfully!')
+            window.setTimeout(() => {
+                hideAlert();
+                location.assign('/blogger/account')
+            }, 1500);
+        }
+    }catch(error){
+        console.log(error)
+        showAlert('error', error);
+        window.setTimeout(()=>{
+            hideAlert()
+        },1500)
+    }
+})

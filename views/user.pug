@@ -4,7 +4,6 @@ block content
   main
     .user_container
       .update__links
-        p.changeInfo Change Info
         p.ChangeProfilePic Change Profile pic
         p.ChangePassword Change Password
         p.logOut Log Out
@@ -12,34 +11,34 @@ block content
       .user_pic
         .user_photo
       .user_info
-        .user_details
+        #userName.user_details
           p UserName
-          p= user.userName
+          input(type = "text" placeholder = "userName" value= user.userName)
         .user_details
           p Email
           p= user.email
-        .user_details
+        #website.user_details
           p Website 
-          p= user.website?user.website:'xyz.com'
-        .user_details
+          input(type = "text" placeholder = "xyz.com" value= user.website?user.website:'')
+        #country.user_details
           p Country 
-          p= user.country?user.country: 'USA'
-        .user_details
+          input(type = "text" placeholder = "USA" value= user.country?user.country: '')
+        #state.user_details
           p State 
-          p= user.state?user.state: 'California'
-        .user_details
+          input(type = "text" placeholder = "California" value= user.state?user.state: '')
+        #city.user_details
           p City 
-          p= user.city?user.city: 'Los Angeles'
-        .user_details
+          input(type = "text" placeholder = "Los Angeles" value= user.city?user.city: '')
+        #linkedin.user_details
           p Linked In 
-          p= user.linkedin?user.linkedin: 'xyz@linkedin.com'
-        .user_details
+          input(type = "text" placeholder = "xyz@linkedin.com" value= user.linkedin?user.linkedin: '')
+        #twitter.user_details
           p Twitter
-          p= user.twitter?user.twitter: 'xyz@twitter.com'
-        .user_details
+          input(type = "text" placeholder = "xyz@twitter.com" value= user.twitter?user.twitter: '')
+        #instagram.user_details
           p Instagram
-          p= user.instagram?user.instagram: 'xyz@instagram.com'
-        .user_details
+          input(type = "text" placeholder = "xyz@instagram.com" value= user.instagram?user.instagram: '')
+        #github.user_details
           p GitHub 
-          p= user.gihub?user.github: 'xyz@github.com'
-
+          input(type = "text" placeholder = "xyz@github.com" value= user.gihub?user.github: '')
+        button(id = "update" type = "button") Update

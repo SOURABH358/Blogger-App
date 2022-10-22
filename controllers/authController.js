@@ -40,6 +40,7 @@ exports.protect = async (req,res,next)=>{
     }
     catch(error)
     {
+        console.log('in protect')
         res.status(401)
         .render('error', {
             message: error

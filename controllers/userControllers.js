@@ -103,15 +103,12 @@ exports.logOut = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     try {
         const updatedUser = await userModel.findByIdAndUpdate(req.user.id,
-            {
-                ...req.body,
-                password: user.password,
-                confirmPassword: undefined
-            },
+            req.body,
             {
                 new: true,
-                runValidators: true
+                runValidators: false
             })
+            res.locals.user = updatedUser;
         res.status(201)
             .json({
                 status: 'success',

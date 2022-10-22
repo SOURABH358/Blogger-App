@@ -7,7 +7,7 @@ const layover = document.querySelector('.layover')
 const close = document.querySelectorAll('.close')
 const logOut = document.querySelector('.update__links .logOut')
 const changeInfo = document.querySelector('.changeInfo')
-const update = document.querySelector('#update')
+const userInfoForm = document.querySelector('.user_info')
 const deleteAccount = document.querySelector('.update__links .delete')
 
 function hideAlert() {
@@ -159,35 +159,40 @@ logOut.addEventListener('click', async () => {
     }
 })
 
-update.addEventListener('click',async (e)=>{
+userInfoForm.addEventListener('submit',async (e)=>{
     e.preventDefault();
 
     try{
         const userName = document.querySelector('#userName input').value
         const website = document.querySelector('#website input').value
-        const country = document.querySelector('.country input').value
-        const state = document.querySelector('.state input').value
-        const city = document.querySelector('.city input').value
-        const linkedin = document.querySelector('.linkedin input').value
-        const twitter = document.querySelector('.twitter input').value
-        const instagram = document.querySelector('.instagram input').value
-        const github = document.querySelector('.github input').value
-
-        const res = await axios({
-            method: 'PATCH',
-            url: 'http://127.0.0.1:3000/blogger/user/updateuser',
-            data:{
-                userName,website,country,state,city,linkedin,twitter, instagram, github
-            }
-            
-        })
-        if(res.data.status === 'success')
+        const country = document.querySelector('#country input').value
+        const state = document.querySelector('#state input').value
+        const city = document.querySelector('#city input').value
+        const linkedin = document.querySelector('#linkedin input').value
+        const twitter = document.querySelector('#twitter input').value
+        const instagram = document.querySelector('#instagram input').value
+        const github = document.querySelector('#github input').value
+        if(userName==='')
         {
-            showAlert('success', 'Data Updated Successfully!')
-            window.setTimeout(() => {
-                hideAlert();
-                location.assign('/blogger/account')
-            }, 1500);
+            throw 'Please provie userName'
+        }
+        else{
+            const res = await axios({
+                method: 'PATCH',
+                url: 'http://127.0.0.1:3000/blogger/user/updateuser',
+                data:{
+                    userName,website,country,state,city,linkedin,twitter, instagram, github
+                }
+                
+            })
+            if(res.data.status === 'success')
+            {
+                showAlert('success', 'Data Updated Successfully!')
+                window.setTimeout(() => {
+                    hideAlert();
+                    location.assign('/blogger/account')
+                }, 1500);
+            }
         }
     }catch(error){
         console.log(error)

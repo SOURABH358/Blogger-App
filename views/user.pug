@@ -10,7 +10,7 @@ block content
         p.delete Delete Account
       .user_pic
         .user_photo
-      .user_info
+      form.user_info
         #userName.user_details
           p UserName
           input(type = "text" placeholder = "userName" value= user.userName)
@@ -19,26 +19,26 @@ block content
           p= user.email
         #website.user_details
           p Website 
-          input(type = "text" placeholder = "xyz.com" value= user.website?user.website:'')
+          input(type = "text" placeholder = "xyz.com" value= user.website?user.website:'' required)
         #country.user_details
           p Country 
-          input(type = "text" placeholder = "USA" value= user.country?user.country: '')
+          input(type = "text" placeholder = "USA" value= user.country?user.country:'')
         #state.user_details
           p State 
-          input(type = "text" placeholder = "California" value= user.state?user.state: '')
+          input(type = "text" placeholder = "California" value= user.state?user.state:'')
         #city.user_details
           p City 
-          input(type = "text" placeholder = "Los Angeles" value= user.city?user.city: '')
+          input(type = "text" placeholder = "Los Angeles" value= user.city?user.city:'')
         #linkedin.user_details
           p Linked In 
-          input(type = "text" placeholder = "xyz@linkedin.com" value= user.linkedin?user.linkedin: '')
+          input(type = "text" placeholder = "xyz@linkedin.com" value= user.linkedin?user.linkedin:'')
         #twitter.user_details
           p Twitter
-          input(type = "text" placeholder = "xyz@twitter.com" value= user.twitter?user.twitter: '')
+          input(type = "text" placeholder = "xyz@twitter.com" value= user.twitter?user.twitter:'')
         #instagram.user_details
           p Instagram
-          input(type = "text" placeholder = "xyz@instagram.com" value= user.instagram?user.instagram: '')
+          input(type = "text" placeholder = "xyz@instagram.com" value= user.instagram?user.instagram:'')
         #github.user_details
           p GitHub 
-          input(type = "text" placeholder = "xyz@github.com" value= user.gihub?user.github: '')
-        button(id = "update" type = "button") Update
+          input(type = "text" placeholder = "xyz@github.com" value= user.gihub?user.github:'')
+        button(id = "update" type = "submit") Update

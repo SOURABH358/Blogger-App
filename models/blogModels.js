@@ -13,12 +13,17 @@ const BlogsSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide tags for your blog']
     }],
+    hero: {
+        type: String,
+        required: [true, 'Please provide hero image for your blog post']
+    },
     createdAt: {
         type: Date,
         default: Date.now()
     },
     Author : {
-        type: String, 
+        type: mongoose.Schema.ObjectId, 
+        ref: 'User',
         required : [true, 'Please provide author']
     }
 })

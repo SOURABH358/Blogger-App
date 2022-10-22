@@ -1,5 +1,6 @@
 const userModels = require('../models/userModels')
 const crypto = require('crypto')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {promisify} = require('util')
 
@@ -132,3 +133,4 @@ exports.resetPassword = (req,res,next)=>{
         })
     }
 }
+

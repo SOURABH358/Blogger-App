@@ -43,14 +43,21 @@ exports.newBlog = (req,res,next)=>{
     res.status(201)
     .render('create')
 }
-exports.createBlog = (req,res, next)=>{
-    const {title, content} = req.body;
-
+exports.createBlog = async (req,res, next)=>{
+    const {title, tags, hero, content} = req.body;
+    const Author = req.body.user.id;
+    const blog = await blogModels.create({
+        title,
+        tags,
+        content,
+        hero,
+        Author
+    });
     res.status(200).json({
         status: 'successful',
         data: {
-            title,
-            content
+            blog
         }
     })
 }
+

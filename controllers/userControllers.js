@@ -140,3 +140,31 @@ exports.deleteUser = async (req, res, next) =>{
             })
     }
 }
+exports.changePassword = async (req,res,next)=>{
+    try{
+        // 1) verify current password is correct
+        const user = await userModel.findById(req.user.id)
+        .select('+password')
+        if(!await (user.checkPassword(req.body.currentPassword, user.password)))
+        {
+            throw 'current Password is incorrect'
+        }
+        // 2) change the password 
+        if(req.body.newPassword != req.body.confirmNewPassword)
+        {
+            throw 'password and confirm password do not match, please try again';
+        }
+        user.password = req.body.newPassword;
+        user.confirmPassword = req.body.confirmNewPassword;
+        
+        await user.save({validateBeforeSave : false})
+
+        createSendToken(user,201,res)
+
+    }catch(error){
+        res.status(401)
+        .render('error',{
+            message: error
+        })
+    }
+}

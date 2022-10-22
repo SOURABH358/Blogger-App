@@ -9,6 +9,9 @@ const logOut = document.querySelector('.update__links .logOut')
 const changeInfo = document.querySelector('.changeInfo')
 const userInfoForm = document.querySelector('.user_info')
 const deleteAccount = document.querySelector('.update__links .delete')
+const changedPasswordForm = document.getElementById('change_password')
+const changePassword = document.querySelector('.update__links .ChangePassword')
+const publish = document.querySelector('#publish')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -66,11 +69,20 @@ if(deleteAccount){
     })
 }
 
+if(changePassword)
+{
+    changePassword.addEventListener('click', () => {
+        changedPasswordForm.classList.add('show__form')
+        layover.classList.add('show__layover')
+    })   
+}
+
 close.forEach(ele => {
     ele.addEventListener('click', () => {
         signupForm.classList.remove('show__form')
         loginForm.classList.remove('show__form')
         // userInfoForm.classList.remove('show__form')
+        changedPasswordForm.classList.remove('show__form')
         layover.classList.remove('show__layover')
     })
 })
@@ -200,5 +212,38 @@ userInfoForm.addEventListener('submit',async (e)=>{
         window.setTimeout(()=>{
             hideAlert()
         },1500)
+    }
+})
+
+changedPasswordForm.addEventListener('submit',async (e)=>{
+    e.preventDefault();
+    try{
+        const currentPassword = document.querySelector('.currentPassword input').value
+        const newPassword = document.querySelector('.newPassword input').value
+        const confirmNewPassword = document.querySelector('.confirmNewPassword input').value
+        const res = await axios({
+            method: 'PATCH',
+            url: 'http://127.0.0.1:3000/blogger/user/changepassword',
+            data:{
+                currentPassword, 
+                newPassword,
+                confirmNewPassword
+            }
+        })
+        if(res.data.status === 'success')
+        {
+            showAlert('success', 'Password successfully updated')
+            changedPasswordForm.classList.remove('show__form')
+            window.setTimeout(()=>{
+                hideAlert();
+                location.assign('/blogger/account')
+            },1500)
+        }
+    }catch(error){
+        console.log(error)
+        showAlert('error', error)
+        window.setTimeout(() => {
+            hideAlert();
+        }, 1500);
     }
 })

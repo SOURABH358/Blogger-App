@@ -50,4 +50,12 @@ router
 .route('/user/deleteuser')
 .delete(authControllers.protect, userController.deleteUser)
 
+router
+.route('/user/changepassword')
+.patch(authControllers.protect, userController.changePassword)
+
+router
+.route('/user/createblog')
+.post(authControllers.protect)
+
 module.exports = router;

@@ -8,8 +8,8 @@ const close = document.querySelectorAll('.close')
 const logOut = document.querySelector('.update__links .logOut')
 const changeInfo = document.querySelector('.changeInfo')
 const update = document.querySelector('#update')
+const deleteAccount = document.querySelector('.delete')
 
-console.log(logOut)
 function hideAlert() {
     const alert = document.querySelector('.alert')
     document.body.removeChild(alert)
@@ -41,7 +41,17 @@ if (login) {
 //     layover.classList.add('show__layover')
 // })
 
-
+deleteAccount.addEventListener('click',async ()=>{
+    try{
+        const res = await axios({
+            method: 'DELETE',
+            url: 'http://127.0.0.1:3000/blogger/user/deleteuser'
+        })
+    }catch(error)
+    {
+        
+    }
+})
 
 close.forEach(ele => {
     ele.addEventListener('click', () => {
@@ -154,7 +164,7 @@ update.addEventListener('click',async (e)=>{
 
         const res = await axios({
             method: 'PATCH',
-            url: 'http://127.0.0.1:3000/blogger/updateuser',
+            url: 'http://127.0.0.1:3000/blogger/user/updateuser',
             data:{
                 userName,website
             }

@@ -43,7 +43,11 @@ router
 .get(authControllers.protect, userController.getUser)
 
 router
-.route('/updateuser')
+.route('/user/updateuser')
 .patch(authControllers.protect, userController.updateUser)
+
+router
+.route('/user/deleteuser')
+.delete(userController.deleteUser)
 
 module.exports = router;

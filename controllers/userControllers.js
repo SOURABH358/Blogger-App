@@ -121,3 +121,10 @@ exports.updateUser = async (req, res, next) => {
             })
     }
 }
+exports.deleteUser = async (req, res, next) =>{
+    await userModel.deleteOne(req.user.id);
+    res.status(201)
+    .json({
+        status: 'success'
+    })
+}

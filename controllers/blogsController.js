@@ -1,9 +1,9 @@
-const { set } = require('mongoose');
+const User = require('../models/userModels')
 const blogModels = require('../models/blogModels')
 
 exports.getAllBlogs = async (req, res, next) =>{
    try{
-    const list = await blogModels.find().select('tags').sort('tags');
+    const list = await blogModels.find().select('tags').sort('createdAt').populate('Author');
     const newList = list.map(ele=>ele.tags.join(",")).join(",").split(",");
     const tagList = [...new Set(newList)]
     const blogs = await blogModels.find(req.query).select('-__v').sort('-createdAt')
@@ -32,12 +32,13 @@ exports.getHome = (req,res,next)=>{
 }
 exports.getMyBlogs = async (req,res,next)=>{
     res.locals.current = 'myBlogs';
-    const blogs = await blogModels.find({Author: req.user.id})
+    const blogs = await blogModels.find({Author: req.user.id}).populate('Author')
     const newList = blogs.map(el=>el.tags.join(",")).join(",").split(",")
     const tagsList = [...new Set(newList)]
     res.status(201)
     .render('myblogs',{
-        tagsList
+        tagsList,
+        blogs
     })
 }
 exports.newBlog = (req,res,next)=>{

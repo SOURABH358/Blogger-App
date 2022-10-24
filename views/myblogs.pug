@@ -9,6 +9,21 @@ block content
                 .blog__tags 
                     each tag in tagsList 
                         a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
-                
-            .myblogs__container 
-                div You do not have any blogs
+            if !blogs.length
+                .myblogs__container 
+                    div You do not have any blogs
+            else
+                .blogs_container
+                    each blog in blogs
+                        .blog_card
+                            .blog_bg
+                                img(src='../images/blog-bg.jpg' alt='blog-bg')
+                            .blog_info
+                                p.blog_title #{blog.title}
+                                .blog_inscript= blog.content.substr(0,100)
+                                .blog_create
+                                    div= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
+                                    div #{blog.Author.userName}
+                                .tags
+                                    each tag in blog.tags 
+                                        span #{tag}

@@ -45,7 +45,8 @@ exports.newBlog = (req,res,next)=>{
 }
 exports.createBlog = async (req,res, next)=>{
     const {title, tags, hero, content} = req.body;
-    const Author = req.body.user.id;
+    console.log(tags)
+    const Author = req.user.id;
     const blog = await blogModels.create({
         title,
         tags,
@@ -54,7 +55,7 @@ exports.createBlog = async (req,res, next)=>{
         Author
     });
     res.status(200).json({
-        status: 'successful',
+        status: 'success',
         data: {
             blog
         }

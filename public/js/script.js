@@ -153,131 +153,149 @@ signupForm.addEventListener('submit', async (e) => {
     }
 })
 
-logOut.addEventListener('click', async () => {
-    try {
-        const res = await axios({
-            method: 'GET',
-            url: 'http://127.0.0.1:3000/blogger/user/logout',
-        })
-        if (res.data.status === 'success') {
-            showAlert('success', 'User successfully logged Out!');
-            window.setTimeout(() => {
-                hideAlert();
-                location.assign('/blogger/home')
-            }, 1500);
+if(logOut){
+    logOut.addEventListener('click', async () => {
+        try {
+            const res = await axios({
+                method: 'GET',
+                url: 'http://127.0.0.1:3000/blogger/user/logout',
+            })
+            if (res.data.status === 'success') {
+                showAlert('success', 'User successfully logged Out!');
+                window.setTimeout(() => {
+                    hideAlert();
+                    location.assign('/blogger/home')
+                }, 1500);
+            }
+        } catch (error) {
+    
         }
-    } catch (error) {
+    })
 
-    }
-})
+}
 
-userInfoForm.addEventListener('submit',async (e)=>{
-    e.preventDefault();
-
-    try{
-        const userName = document.querySelector('#userName input').value
-        const website = document.querySelector('#website input').value
-        const country = document.querySelector('#country input').value
-        const state = document.querySelector('#state input').value
-        const city = document.querySelector('#city input').value
-        const linkedin = document.querySelector('#linkedin input').value
-        const twitter = document.querySelector('#twitter input').value
-        const instagram = document.querySelector('#instagram input').value
-        const github = document.querySelector('#github input').value
-        if(userName==='')
-        {
-            throw 'Please provie userName'
+if(userInfoForm)
+{
+    userInfoForm.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+    
+        try{
+            const userName = document.querySelector('#userName input').value
+            const website = document.querySelector('#website input').value
+            const country = document.querySelector('#country input').value
+            const state = document.querySelector('#state input').value
+            const city = document.querySelector('#city input').value
+            const linkedin = document.querySelector('#linkedin input').value
+            const twitter = document.querySelector('#twitter input').value
+            const instagram = document.querySelector('#instagram input').value
+            const github = document.querySelector('#github input').value
+            if(userName==='')
+            {
+                throw 'Please provie userName'
+            }
+            else{
+                const res = await axios({
+                    method: 'PATCH',
+                    url: 'http://127.0.0.1:3000/blogger/user/updateuser',
+                    data:{
+                        userName,website,country,state,city,linkedin,twitter, instagram, github
+                    }
+                    
+                })
+                if(res.data.status === 'success')
+                {
+                    showAlert('success', 'Data Updated Successfully!')
+                    window.setTimeout(() => {
+                        hideAlert();
+                        location.assign('/blogger/account')
+                    }, 1500);
+                }
+            }
+        }catch(error){
+            console.log(error)
+            showAlert('error', error);
+            window.setTimeout(()=>{
+                hideAlert()
+            },1500)
         }
-        else{
+    })
+}
+
+if(changedPasswordForm)
+{
+    changedPasswordForm.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        try{
+            const currentPassword = document.querySelector('.currentPassword input').value
+            const newPassword = document.querySelector('.newPassword input').value
+            const confirmNewPassword = document.querySelector('.confirmNewPassword input').value
             const res = await axios({
                 method: 'PATCH',
-                url: 'http://127.0.0.1:3000/blogger/user/updateuser',
+                url: 'http://127.0.0.1:3000/blogger/user/changepassword',
                 data:{
-                    userName,website,country,state,city,linkedin,twitter, instagram, github
+                    currentPassword, 
+                    newPassword,
+                    confirmNewPassword
                 }
-                
             })
             if(res.data.status === 'success')
             {
-                showAlert('success', 'Data Updated Successfully!')
-                window.setTimeout(() => {
+                showAlert('success', 'Password successfully updated')
+                changedPasswordForm.classList.remove('show__form')
+                window.setTimeout(()=>{
                     hideAlert();
                     location.assign('/blogger/account')
-                }, 1500);
+                },1500)
             }
+        }catch(error){
+            console.log(error)
+            showAlert('error', error)
+            window.setTimeout(() => {
+                hideAlert();
+            }, 1500);
         }
-    }catch(error){
-        console.log(error)
-        showAlert('error', error);
-        window.setTimeout(()=>{
-            hideAlert()
-        },1500)
-    }
-})
+    })
+}
 
-changedPasswordForm.addEventListener('submit',async (e)=>{
-    e.preventDefault();
-    try{
-        const currentPassword = document.querySelector('.currentPassword input').value
-        const newPassword = document.querySelector('.newPassword input').value
-        const confirmNewPassword = document.querySelector('.confirmNewPassword input').value
-        const res = await axios({
-            method: 'PATCH',
-            url: 'http://127.0.0.1:3000/blogger/user/changepassword',
-            data:{
-                currentPassword, 
-                newPassword,
-                confirmNewPassword
+if(createForm)
+{
+    createForm.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        try{
+            const title = document.getElementById('title').value
+            const tags = document.getElementById('tags').value
+            .split(",").map(el=>{
+                return el.split(" ").map(str=>{
+                    return str[0].toUpperCase() + str.substr(1)
+                }).join(" ")
+            })
+            const hero = document.getElementById('image').value
+            const content = document.getElementById('content').value
+            const res = await axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:3000/blogger/user/createblog',
+                data:{
+                    title,
+                    tags,
+                    hero,
+                    content
+                }
+            })
+            if(res.data.status === 'success')
+            {
+                showAlert('success', 'Blog published successfully!')
+                window.setTimeout(()=>{
+                    hideAlert();
+                    location.assign('/blogger/create')
+                },1500)
             }
-        })
-        if(res.data.status === 'success')
+        }catch(error)
         {
-            showAlert('success', 'Password successfully updated')
-            changedPasswordForm.classList.remove('show__form')
+            console.log(error)
+            showAlert('error', error)
             window.setTimeout(()=>{
                 hideAlert();
-                location.assign('/blogger/account')
             },1500)
         }
-    }catch(error){
-        console.log(error)
-        showAlert('error', error)
-        window.setTimeout(() => {
-            hideAlert();
-        }, 1500);
-    }
-})
-
-createForm.addEventListener('submit',async (e)=>{
-    e.preventDefault();
-    try{
-        const title = document.getElementById('title').value
-        const tags = document.getElementById('tags').value
-        const hero = document.getElementById('image').value
-        const content = document.getElementById('content').value
-        const res = await axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:3000/blogger/user/createblog',
-            data:{
-                title,
-                tags,
-                hero,
-                content
-            }
-        })
-        if(res.data.status === 'success')
-        {
-            showAlert('success', 'Blog published successfully!')
-            window.setTimeout(()=>{
-                hideAlert();
-                location.assign('/blogger/create')
-            },1500)
-        }
-    }catch(error)
-    {
-        showAlert('error', error)
-        window.setTimeout(()=>{
-            hideAlert();
-        },1500)
-    }
-})
+    })
+}

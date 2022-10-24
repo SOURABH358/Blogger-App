@@ -1,3 +1,4 @@
+const { set } = require('mongoose');
 const blogModels = require('../models/blogModels')
 
 exports.getAllBlogs = async (req, res, next) =>{
@@ -29,12 +30,14 @@ exports.getHome = (req,res,next)=>{
     res.status(201)
     .render('home')
 }
-exports.getMyBlogs = (req,res,next)=>{
+exports.getMyBlogs = async (req,res,next)=>{
     res.locals.current = 'myBlogs';
-    const tagList = []
+    const blogs = await blogModels.find({Author: req.user.id})
+    const newList = blogs.map(el=>el.tags.join(",")).join(",").split(",")
+    const tagsList = [...new Set(newList)]
     res.status(201)
     .render('myblogs',{
-        tagList
+        tagsList
     })
 }
 exports.newBlog = (req,res,next)=>{

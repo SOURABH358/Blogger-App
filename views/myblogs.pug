@@ -7,7 +7,7 @@ block content
             .filter
                 p Search By Tags
                 .blog__tags 
-                    each tag in tagList 
+                    each tag in tagsList 
                         a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
                 
             .myblogs__container 

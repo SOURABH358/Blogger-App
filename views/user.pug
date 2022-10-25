@@ -11,8 +11,8 @@ block content
       form.user_info
         .user_pic
           div 
-            img.user_photo(src = "/images/default.png")
-          input(type = "file" accept  = "image/*" id = "photo", name = "photo")
+            img.user_photo(src= `${user.photo}`)
+          input(type = "file", accept  = "image/*", id = "photo", name = "photo")
           label(for = "photo") Choose
         #userName.user_details
           p UserName

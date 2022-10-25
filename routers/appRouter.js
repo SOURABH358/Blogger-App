@@ -31,35 +31,35 @@ router
 .route('/home')
 .get(blogsControllers.getHome)
 
-router.use(authControllers.protect)
+// router.use(authControllers.protect)
 
 router
 .route('/myblogs')
-.get( blogsControllers.getMyBlogs)
+.get( authControllers.protect,blogsControllers.getMyBlogs)
 router
 .route('/create')
-.get( blogsControllers.newBlog)
+.get( authControllers.protect,blogsControllers.newBlog)
 
 router
 .route('/account')
-.get( userController.getUser)
+.get( authControllers.protect,userController.getUser)
 
 router
 .route('/user/updateuser')
-.patch( userController.uploadAvatar,userController.resizePhoto , userController.updateUser)
+.patch( authControllers.protect,userController.uploadAvatar,userController.resizePhoto,userController.updateUser)
 
 router
 .route('/user/deleteuser')
-.delete( userController.deleteUser)
+.delete( authControllers.protect,userController.deleteUser)
 
 router
 .route('/user/changepassword')
-.patch( userController.changePassword)
+.patch( authControllers.protect,userController.changePassword)
 
 
 
 router
 .route('/user/createblog')
-.post( blogsControllers.createBlog)
+.post( authControllers.protect,blogsControllers.createBlog)
 
 module.exports = router;

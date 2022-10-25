@@ -1,17 +1,17 @@
-const userModel = require('../models/userModels')
-const jwt = require('jsonwebtoken')
 const multer = require('multer')
 const sharp = require('sharp')
-// const multerStorage = multer.diskStorage({
-//     destination: (req, file, cb)=>{
-//         cb(null, 'public/images')
-//     },
-//     filename: (req,file, cb)=>{
-//         const ext = file.mimetype.split("/")[1];
-//         cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
-//     }
-// })
-const multerStorage = multer.memoryStorage()
+const userModel = require('../models/userModels')
+const jwt = require('jsonwebtoken')
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, 'public/images')
+    },
+    filename: (req,file, cb)=>{
+        const ext = file.mimetype.split("/")[1];
+        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+    }
+})
+// const multerStorage = multer.memoryStorage()
 const multerFilter =((req,file,cb)=>{
     if(file.mimetype.startsWith('image'))
         cb(null, true)
@@ -19,6 +19,7 @@ const multerFilter =((req,file,cb)=>{
         cb(null, false)
 })
 const upload = multer({
+    dest:'/public/images',
     storage: multerStorage,
     fileFilter: multerFilter
 })
@@ -26,16 +27,24 @@ const upload = multer({
 exports.uploadAvatar = upload.single('photo');
 
 exports.resizePhoto = async (req,res, next)=>{
-    if(!req.file) return next();
+    try{
+        if(!req.file) return next();
 
     req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
-    await sharp(req.file.buffer)
-    .resize({width:500,height:500})
-    .toFormat('jpeg')
-    .jpeg({quality: 90})
-    .toFile(`public/images/${req.file.filename}`)
+    // await sharp(req.file.buffer)
+    // .resize({width:500,height:500})
+    // .toFile(`/public/images/${req.file.filename}`)
+    console.log(req.file)
+
     next();
+    }catch(error)
+    {
+        res.status(404)
+        .render('error',{
+            message: error
+        })
+    }
 }
 function signInToken(id) {
     return jwt.sign({ id }, process.env.JWT_SECURITY_KEY, {
@@ -137,13 +146,20 @@ exports.logOut = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
     try {
-        const filteredObj = {};
-        req.body.forEach(key,val=>{
-            if(val!==''){
-                filteredObj[key] = val
-            }
-        })
-        filteredObj.photo = req.file.filename;
+        
+        const filteredObj = {...req.body};
+        // req.body.forEach(key,val=>{
+        //     if(val!==''){
+        //         filteredObj[key] = val
+        //     }
+        // })
+        console.log(req.file)
+        if(req.file)
+        {
+
+            filteredObj.photo = req.file.filename;
+            console.log(filteredObj)
+        }
         const updatedUser = await userModel.findByIdAndUpdate(req.user.id,
             filteredObj,
             {

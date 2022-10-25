@@ -77,81 +77,53 @@ if(changePassword)
     })   
 }
 
-close.forEach(ele => {
-    ele.addEventListener('click', () => {
-        signupForm.classList.remove('show__form')
-        loginForm.classList.remove('show__form')
-        // userInfoForm.classList.remove('show__form')
-        changedPasswordForm.classList.remove('show__form')
-        layover.classList.remove('show__layover')
-    })
-})
-
-loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    try {
-        const email = document.querySelector('#loginemail input').value
-        const password = document.querySelector('#loginpassword input').value
-        const res = await axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:3000/blogger/user/login',
-            data: {
-                email,
-                password
-            }
-        })
-        if (res.data.status === 'success') {
-            showAlert('success', 'Logged In Successfully')
+if(close)
+{
+    close.forEach(ele => {
+        ele.addEventListener('click', () => {
+            signupForm.classList.remove('show__form')
             loginForm.classList.remove('show__form')
+            // userInfoForm.classList.remove('show__form')
+            changedPasswordForm.classList.remove('show__form')
             layover.classList.remove('show__layover')
+        })
+    })
+}
+
+if(loginForm)
+{
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        try {
+            const email = document.querySelector('#loginemail input').value
+            const password = document.querySelector('#loginpassword input').value
+            const res = await axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:3000/blogger/user/login',
+                data: {
+                    email,
+                    password
+                }
+            })
+            if (res.data.status === 'success') {
+                showAlert('success', 'Logged In Successfully')
+                loginForm.classList.remove('show__form')
+                layover.classList.remove('show__layover')
+                window.setTimeout(() => {
+                    hideAlert();
+                    location.assign('/blogger/home')
+                }, 1500)
+            }
+        } catch (error) {
+            showAlert('error', error.response.data.error)
             window.setTimeout(() => {
                 hideAlert();
-                location.assign('/blogger/home')
             }, 1500)
         }
-    } catch (error) {
-        showAlert('error', error.response.data.error)
-        window.setTimeout(() => {
-            hideAlert();
-        }, 1500)
-    }
+    
+    })
+}
 
-})
-signupForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-
-    try {
-        const userName = document.querySelector('#name input').value
-        const password = document.querySelector('#signuppassword input').value
-        const confirmPassword = document.querySelector('#confirm_password input').value
-        const email = document.querySelector('#signupemail input').value
-        const res = await axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:3000/blogger/user/signup',
-            data: {
-                userName,
-                email,
-                password,
-                confirmPassword
-            }
-        })
-        if (res.data.status === 'success') {
-            showAlert('success', 'Signed In Successfully')
-            signupForm.classList.remove('show__form')
-            layover.classList.remove('show__layover')
-            window.setTimeout(() => {
-                hideAlert();
-                location.assign('/blogger/home')
-            }, 1500);
-        }
-    } catch (error) {
-        showAlert('error', error.response.data.message)
-        window.setTimeout(() => {
-            hideAlert()
-        }, 1500)
-    }
-})
 
 if(logOut){
     logOut.addEventListener('click', async () => {
@@ -173,6 +145,44 @@ if(logOut){
     })
 
 }
+if(signupForm)
+{
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+    
+    
+        try {
+            const userName = document.querySelector('#name input').value
+            const password = document.querySelector('#signuppassword input').value
+            const confirmPassword = document.querySelector('#confirm_password input').value
+            const email = document.querySelector('#signupemail input').value
+            const res = await axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:3000/blogger/user/signup',
+                data: {
+                    userName,
+                    email,
+                    password,
+                    confirmPassword
+                }
+            })
+            if (res.data.status === 'success') {
+                showAlert('success', 'Signed In Successfully')
+                signupForm.classList.remove('show__form')
+                layover.classList.remove('show__layover')
+                window.setTimeout(() => {
+                    hideAlert();
+                    location.assign('/blogger/home')
+                }, 1500);
+            }
+        } catch (error) {
+            showAlert('error', error.response.data.message)
+            window.setTimeout(() => {
+                hideAlert()
+            }, 1500)
+        }
+    })
+}
 
 if(userInfoForm)
 {
@@ -189,17 +199,27 @@ if(userInfoForm)
             const twitter = document.querySelector('#twitter input').value
             const instagram = document.querySelector('#instagram input').value
             const github = document.querySelector('#github input').value
+            const photo = document.getElementById('photo').files[0];
             if(userName==='')
             {
                 throw 'Please provie userName'
             }
             else{
+                const data = new FormData();
+                data.append('userName',userName)
+                data.append('website',website)
+                data.append('country',country)
+                data.append('state',state)
+                data.append('city',city)
+                data.append('linkedin',linkedin)
+                data.append('twitter',twitter)
+                data.append('instagram',instagram)
+                data.append('github',github)
+                data.append('photo',photo)
                 const res = await axios({
                     method: 'PATCH',
                     url: 'http://127.0.0.1:3000/blogger/user/updateuser',
-                    data:{
-                        userName,website,country,state,city,linkedin,twitter, instagram, github
-                    }
+                    data
                     
                 })
                 if(res.data.status === 'success')
@@ -207,9 +227,13 @@ if(userInfoForm)
                     showAlert('success', 'Data Updated Successfully!')
                     window.setTimeout(() => {
                         hideAlert();
-                        location.assign('/blogger/account')
+                        // location.assign('/blogger/account')
                     }, 1500);
                 }
+                else{
+                    console.log(error)
+                }
+
             }
         }catch(error){
             console.log(error)

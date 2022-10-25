@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
     },
     photo: {
         type: String,
-        default: 'default.png'
+        default: '/blogger/public/images/blog-bg.jpg'
     },
     website: String,
     country: String, 

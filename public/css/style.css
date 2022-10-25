@@ -239,18 +239,30 @@ a{
 }
 
 .user_pic{
-    height: 10vw;
     text-align: center;
     border-bottom: 2px solid white;
-    width: 90%;
-    margin: auto;
+    margin-bottom: 4rem;
+    padding: 1rem 0;
 }
-#photo{
+.user_photo{
     width: 9rem;
     margin: auto;
     height: 9rem;
     border-radius: 50%;
-    background-color: lightblue;
+    background-color: lightgray;
+    margin-bottom: 2rem;
+}
+#photo{
+   display: none;
+}
+#photo +  label{
+    color: white;
+    padding: 0.25rem 1rem;
+    border: 2px solid rgb(227, 11, 92);
+    border-radius: 0.4rem;
+}
+#photo + label:hover{
+    background-color: rgb(227, 11, 92);
 }
 .user_info{
     width: 90%;

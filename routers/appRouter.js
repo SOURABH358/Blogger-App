@@ -46,7 +46,7 @@ router
 
 router
 .route('/user/updateuser')
-.patch( userController.updateUser)
+.patch( userController.uploadAvatar,userController.resizePhoto , userController.updateUser)
 
 router
 .route('/user/deleteuser')
@@ -56,9 +56,7 @@ router
 .route('/user/changepassword')
 .patch( userController.changePassword)
 
-router
-.route('/user/changeprofile')
-.post(userController.uploadAvatar, userController.updateProfile)
+
 
 router
 .route('/user/createblog')

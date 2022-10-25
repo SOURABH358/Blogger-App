@@ -31,7 +31,10 @@ const userSchema = mongoose.Schema({
             Message: 'password and confirm password do not match!'
         }
     },
-    photo: String,
+    photo: {
+        type: String,
+        default: 'default.png'
+    },
     website: String,
     country: String, 
     state: String, 

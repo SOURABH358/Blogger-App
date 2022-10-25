@@ -22,9 +22,6 @@ router
 .route('/blogs')
 .get(blogsControllers.getAllBlogs)
 
-router
-.route('/myblogs')
-.get(authControllers.protect, blogsControllers.getMyBlogs)
 
 router
 .route('/')
@@ -34,28 +31,37 @@ router
 .route('/home')
 .get(blogsControllers.getHome)
 
+router.use(authControllers.protect)
+
+router
+.route('/myblogs')
+.get( blogsControllers.getMyBlogs)
 router
 .route('/create')
-.get(authControllers.protect, blogsControllers.newBlog)
+.get( blogsControllers.newBlog)
 
 router
 .route('/account')
-.get(authControllers.protect, userController.getUser)
+.get( userController.getUser)
 
 router
 .route('/user/updateuser')
-.patch(authControllers.protect, userController.updateUser)
+.patch( userController.updateUser)
 
 router
 .route('/user/deleteuser')
-.delete(authControllers.protect, userController.deleteUser)
+.delete( userController.deleteUser)
 
 router
 .route('/user/changepassword')
-.patch(authControllers.protect, userController.changePassword)
+.patch( userController.changePassword)
+
+router
+.route('/user/changeprofile')
+.post(userController.uploadAvatar, userController.updateProfile)
 
 router
 .route('/user/createblog')
-.post(authControllers.protect, blogsControllers.createBlog)
+.post( blogsControllers.createBlog)
 
 module.exports = router;

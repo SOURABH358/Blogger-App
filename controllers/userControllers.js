@@ -1,7 +1,27 @@
 const userModel = require('../models/userModels')
 const jwt = require('jsonwebtoken')
+const multer = require('multer')
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, 'public/images')
+    },
+    filename: (req,file, cb)=>{
+        const ext = file.mimetype.split("/")[1];
+        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+    }
+})
+const multerFilter =((req,file,cb)=>{
+    if(file.mimetype.startsWith('image'))
+        cb(null, true)
+    else 
+        cb(null, false)
+})
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter
+})
 
-
+exports.uploadAvatar = upload.single('photo')
 function signInToken(id) {
     return jwt.sign({ id }, process.env.JWT_SECURITY_KEY, {
         expiresIn: '90d'
@@ -120,6 +140,9 @@ exports.updateUser = async (req, res, next) => {
                 message: error
             })
     }
+}
+exports.updateProfile = (req,res,next)=>{
+    console.log(req.file)
 }
 exports.deleteUser = async (req, res, next) =>{
     try{

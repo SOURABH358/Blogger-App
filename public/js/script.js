@@ -279,7 +279,7 @@ if(createForm)
                     tags,
                     hero,
                     content
-                }
+                },
             })
             if(res.data.status === 'success')
             {

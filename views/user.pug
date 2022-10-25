@@ -9,7 +9,8 @@ block content
         p.logOut Log Out
         p.delete Delete Account
       .user_pic
-        .user_photo
+        input(type = "image", id = "photo", name = "photo" placeholder= "Choose profile pic")
+        label(for = "photo") Choose profile pic
       form.user_info
         #userName.user_details
           p UserName

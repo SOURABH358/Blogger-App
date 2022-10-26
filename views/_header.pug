@@ -14,7 +14,7 @@ nav.navbar
     .account
       p= user.userName.split(" ")[0]
       a(href = "http://127.0.0.1:3000/blogger/account")
-        img.user__image(src= `../${user.photo}`)
+        img.user__image(src= user.photo ?`../../${user.photo}`:'../../users/default.png')
           
   else
     .authenticate 

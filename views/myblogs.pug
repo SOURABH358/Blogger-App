@@ -17,7 +17,7 @@ block content
                     each blog in blogs
                         a(href= blog.slug?`http://127.0.0.1:3000/blogger/blogs/${blog.slug}`:'#').blog_card
                             .blog_bg
-                                img(src='../images/blog-bg.jpg' alt='blog-bg')
+                                img(src= blog.hero?`../../${blog.hero}`:'../images/blog-bg.jpg' alt='blog-bg')
                             .blog_info
                                 p.blog_title #{blog.title}
                                 .blog_inscript= blog.content.substr(0,100)

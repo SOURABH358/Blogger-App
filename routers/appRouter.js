@@ -64,6 +64,6 @@ router
 
 router
 .route('/user/createblog')
-.post( authControllers.protect,blogsControllers.createBlog)
+.post( authControllers.protect,blogsControllers.uploadBG, blogsControllers.createBlog)
 
 module.exports = router;

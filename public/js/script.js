@@ -301,17 +301,18 @@ if(createForm)
                     return str[0].toUpperCase() + str.substr(1)
                 }).join(" ")
             })
-            const hero = document.getElementById('image').value
+            const hero = document.querySelector('#image input').files[0]
             const content = document.getElementById('content').value
+
+            const data = new FormData();
+            data.append('title', title)
+            data.append('tags', tags)
+            data.append('hero', hero)
+            data.append('content', content)
             const res = await axios({
                 method: 'POST',
                 url: 'http://127.0.0.1:3000/blogger/user/createblog',
-                data:{
-                    title,
-                    tags,
-                    hero,
-                    content
-                },
+                data
             })
             if(res.data.status === 'success')
             {

@@ -6,7 +6,7 @@ const emailValidator = require('deep-email-validator')
 
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb)=>{
-        cb(null, 'uploads')
+        cb(null, 'users')
     },
     filename: (req,file, cb)=>{
         const ext = file.mimetype.split("/")[1];
@@ -14,14 +14,13 @@ const multerStorage = multer.diskStorage({
     }
 })
 // const multerStorage = multer.memoryStorage()
-const multerFilter =((req,file,cb)=>{
+const multerFilter =(req,file,cb)=>{
     if(file.mimetype.startsWith('image'))
         cb(null, true)
     else 
         cb(null, false)
-})
+}
 const upload = multer({
-    dest:'/public/images',
     storage: multerStorage,
     fileFilter: multerFilter
 })

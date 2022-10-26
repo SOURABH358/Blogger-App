@@ -487,7 +487,23 @@ a{
 }
 #image{
     height: 15rem;
+    width: 100%;
     text-align: center;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#image input{
+    display: none;
+}
+#image label{
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    background-color: rgb(227, 11, 92);
+    color: white;
+    border-radius: 1rem;
+    
 }
 #tags{
     height: 2rem;

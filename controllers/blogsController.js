@@ -1,5 +1,26 @@
 const User = require('../models/userModels')
 const blogModels = require('../models/blogModels');
+const multer = require('multer')
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, 'uploads')
+    },
+    filename: (req,file,cb)=>{
+        const ext = file.mimetype.split("/")[1];
+        cb(null,`blog-bg-${req.user.id}-${Date.now()}.${ext}`)
+    }
+})
+const multerFilter = (req,file,cb)=>{
+    if(file.mimetype.startsWith('image'))
+        cb(null, true)
+    else 
+        cb(null, false)
+}
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter
+})
+exports.uploadBG = upload.single('hero')
 
 exports.getAllBlogs = async (req, res, next) =>{
    try{
@@ -51,17 +72,15 @@ exports.newBlog = (req,res,next)=>{
     .render('create')
 }
 exports.createBlog = async (req,res, next)=>{
-    const {title, tags, hero, content} = req.body;
-    const slug = title.toLowerCase().split(" ").join("-")
-    const Author = req.user.id;
-    const blog = await blogModels.create({
-        title,
-        tags,
-        content,
-        hero,
-        Author,
-        slug
-    });
+    const filterBody = {...req.body};
+    filterBody.slug = req.body.title.toLowerCase().split(" ").join("-")
+    filterBody.Author = req.user.id;
+
+    if(req.file)
+    {
+        filterBody.hero = req.file.path
+    }
+    const blog = await blogModels.create(filterBody);
     res.status(200).json({
         status: 'success',
         data: {

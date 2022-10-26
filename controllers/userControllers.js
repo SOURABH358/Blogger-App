@@ -30,7 +30,7 @@ exports.resizePhoto = async (req,res, next)=>{
     try{
         if(!req.file) return next();
 
-    req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+    req.file.filename = `user-${req.user.id}-${Date.now()}.jpg`;
 
     // await sharp(req.file.buffer)
     // .resize({width:500,height:500})

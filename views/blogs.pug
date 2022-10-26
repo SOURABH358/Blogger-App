@@ -8,17 +8,21 @@ block content
                 each tag in tagList 
                     a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
             
-        .blogs_container
-            each blog in blogs
-                a(href= `http://127.0.0.1:3000/blogger/${blog.slug}`).blog_card
-                    .blog_bg
-                        img(src='../images/blog-bg.jpg' alt='blog-bg')
-                    .blog_info
-                        p.blog_title #{blog.title}
-                        .blog_inscript= blog.content.substr(0,100)
-                        .blog_create
-                            div= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
-                            div #{blog.Author}
-                        .tags
-                            each tag in blog.tags 
-                                span #{tag}
+        if blogs.length 
+            .blogs_container
+                each blog in blogs
+                    a(href= blog.slug?`http://127.0.0.1:3000/blogger/blogs/${blog.slug}`:'#').blog_card
+                        .blog_bg
+                            img(src='../images/blog-bg.jpg' alt='blog-bg')
+                        .blog_info
+                            p.blog_title #{blog.title}
+                            .blog_inscript= blog.content.substr(0,100)
+                            .blog_create
+                                p= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
+                                p #{blog.Author}
+                            .tags
+                                each tag in blog.tags 
+                                    span #{tag}
+        else 
+            .blogs__empty
+                div No blogs found

@@ -3,31 +3,15 @@ extends base
 block content 
 
     main
-    section.blog__template
-        h1 An Intro to web Development
-        .blog__tags
-        p Web Development
-        p Programming
-        .blog__template__info
-        p Author: Jonas
-        p Date: 9th October, 2022 14:32PM
-        .blog__hero
-        img(src='../images/blog-bg.jpg' alt='blog_hero')
-        p.blog__content
-        | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum voluptatibus atque est corporis sint
-        | itaque maiores inventore pariatur architecto eligendi temporibus alias vitae unde quod incidunt ipsa
-        | autem vel dicta totam quam, reprehenderit sapiente sit. Quidem quibusdam sed ex, magnam porro dolores
-        | labore eum eos necessitatibus velit, expedita voluptates optio omnis error alias doloremque, sequi
-        | aperiam saepe amet reprehenderit officia id. Illo, dolores excepturi! Voluptatum provident beatae cum
-        | ullam incidunt nihil ipsam vero molestias officiis ipsa at, reiciendis quaerat maxime ratione nobis.
-        br
-        br
-        |                 Inventore repellat rerum deleniti autem pariatur eos voluptates labore excepturi! Commodi fugiat
-        |                 repudiandae officia quibusdam minima, rem ut asperiores, laborum eos architecto necessitatibus fugit
-        |                 molestiae a dicta officiis vel veniam reprehenderit ab. Voluptatum amet rem nulla quasi ducimus
-        |                 laboriosam ratione totam deleniti ad nesciunt? Qui repudiandae adipisci voluptatum earum neque sunt
-        |                 maiores impedit consequatur nihil a velit ad debitis eaque tempore quos distinctio, itaque provident ea
-        |                 nemo doloribus voluptatem tempora. Perspiciatis ab necessitatibus reiciendis nobis dolore recusandae
-        |                 autem! Rerum, odit voluptatem? In vel sequi maxime totam itaque eius eveniet quas delectus et esse iste
-        |                 provident tenetur vero ipsum dolorum accusantium consequuntur dignissimos praesentium, explicabo qui,
-        |                 quisquam quia soluta. Doloremque illum unde consequatur qui quam suscipit aliquam perferendis excepturi!
+        section.blog__template
+            h1= blog.title
+            .blog__tags
+                each tag in blog.tags 
+                    p= tag
+            .blog__template__info
+                p Author: #{blog.Author.userName}
+                p= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
+            .blog__hero
+                img(src='/images/blog-bg.jpg' alt='blog_hero')
+                p.blog__content= blog.content
+        

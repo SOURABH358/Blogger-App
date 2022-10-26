@@ -31,6 +31,10 @@ router
 .route('/home')
 .get(blogsControllers.getHome)
 
+router
+.route('/blogs/:slug')
+.get(blogsControllers.getBlog)
+
 // router.use(authControllers.protect)
 
 router

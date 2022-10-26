@@ -10,7 +10,7 @@ block content
                     each tag in tagsList 
                         a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
             if !blogs.length
-                .myblogs__container 
+                .blogs__empty 
                     div You do not have any blogs
             else
                 .blogs_container

@@ -1,9 +1,10 @@
 const User = require('../models/userModels')
-const blogModels = require('../models/blogModels')
+const blogModels = require('../models/blogModels');
+const { render } = require('pug');
 
 exports.getAllBlogs = async (req, res, next) =>{
    try{
-    const list = await blogModels.find().select('tags').sort('createdAt').populate('Author');
+    const list = await blogModels.find().select('tags').sort('createdAt');
     const newList = list.map(ele=>ele.tags.join(",")).join(",").split(",");
     const tagList = [...new Set(newList)]
     const blogs = await blogModels.find(req.query).select('-__v').sort('-createdAt')
@@ -49,14 +50,15 @@ exports.newBlog = (req,res,next)=>{
 }
 exports.createBlog = async (req,res, next)=>{
     const {title, tags, hero, content} = req.body;
-    console.log(tags)
+    const slug = title.toLowerCase().split(" ").join("-")
     const Author = req.user.id;
     const blog = await blogModels.create({
         title,
         tags,
         content,
         hero,
-        Author
+        Author,
+        slug
     });
     res.status(200).json({
         status: 'success',
@@ -66,3 +68,19 @@ exports.createBlog = async (req,res, next)=>{
     })
 }
 
+exports.getBlog = async (req,res,next)=>{
+    try{
+    const blog = await blogModels.findOne({slug: req.params.slug}).populate('Author')
+    
+    res.status(201)
+    .render('blog_template',{
+        blog
+    })
+    }catch(error)
+    {
+        res.status(402)
+        .render('error',{
+            message: error
+        })
+    }
+}

@@ -25,7 +25,8 @@ const BlogsSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId, 
         ref: 'User',
         required : [true, 'Please provide author']
-    }
+    },
+    slug:String
 })
 
 const BlogModel = mongoose.model('Blog', BlogsSchema);

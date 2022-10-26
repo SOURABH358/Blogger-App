@@ -1,13 +1,12 @@
 const User = require('../models/userModels')
 const blogModels = require('../models/blogModels');
-const { render } = require('pug');
 
 exports.getAllBlogs = async (req, res, next) =>{
    try{
-    const list = await blogModels.find().select('tags').sort('createdAt');
+    const list = await blogModels.find().populate('Author').sort('createdAt');
     const newList = list.map(ele=>ele.tags.join(",")).join(",").split(",");
     const tagList = [...new Set(newList)]
-    const blogs = await blogModels.find(req.query).select('-__v').sort('-createdAt')
+    const blogs = await blogModels.find(req.query).populate('Author').select('-__v').sort('-createdAt')
 
     res.locals.current = 'blogs';
     res
@@ -26,14 +25,17 @@ exports.getAllBlogs = async (req, res, next) =>{
     })
    }
 }
-exports.getHome = (req,res,next)=>{
+exports.getHome = async (req,res,next)=>{
+    const blogs = await blogModels.find().populate('Author').sort('-createdAt')
     res.locals.current = 'home';
     res.status(201)
-    .render('home')
+    .render('home', {
+        blogs
+    })
 }
 exports.getMyBlogs = async (req,res,next)=>{
     res.locals.current = 'myBlogs';
-    const blogs = await blogModels.find({Author: req.user.id}).populate('Author')
+    const blogs = await blogModels.find({Author: req.user.id}).populate('Author').sort('-createdAt')
     const newList = blogs.map(el=>el.tags.join(",")).join(",").split(",")
     const tagsList = [...new Set(newList)]
     res.status(201)

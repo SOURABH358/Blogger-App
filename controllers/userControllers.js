@@ -2,13 +2,15 @@ const multer = require('multer')
 const sharp = require('sharp')
 const userModel = require('../models/userModels')
 const jwt = require('jsonwebtoken')
+const emailValidator = require('deep-email-validator')
+
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb)=>{
-        cb(null, 'public/images')
+        cb(null, 'uploads')
     },
     filename: (req,file, cb)=>{
         const ext = file.mimetype.split("/")[1];
-        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+        cb(null,`user-${req.user.id}-${Date.now()}.${ext}`)
     }
 })
 // const multerStorage = multer.memoryStorage()
@@ -45,6 +47,10 @@ exports.resizePhoto = async (req,res, next)=>{
             message: error
         })
     }
+}
+
+async function isEmailValid(email){
+    return emailValidator.validate(email)
 }
 function signInToken(id) {
     return jwt.sign({ id }, process.env.JWT_SECURITY_KEY, {
@@ -89,12 +95,20 @@ exports.getUser = (req, res, next) => {
 exports.signUpUser = async (req, res, next) => {
     // const {userName, Password} = req.body;
     try {
+        const {userName, email, password, confirmPassword} = req.body
+        const {valid, reason, validators} = await isEmailValid(email)
+
+        if(!valid)
+        {
+            throw 'Please provide a valid email address'
+        }
         const user = await userModel.create({
-            userName: req.body.userName,
-            email: req.body.email,
-            password: req.body.password,
-            confirmPassword: req.body.confirmPassword
+            userName,
+            email,
+            password,
+            confirmPassword
         })
+        
         createSendToken(user, 201, res)
         // const token = signInToken(user._id)
         // res.status(201)
@@ -107,7 +121,7 @@ exports.signUpUser = async (req, res, next) => {
     } catch (err) {
         res.status(401).json({
             status: 'failure',
-            message: err.message
+            message: err
         })
     }
 }
@@ -148,17 +162,11 @@ exports.updateUser = async (req, res, next) => {
     try {
         
         const filteredObj = {...req.body};
-        // req.body.forEach(key,val=>{
-        //     if(val!==''){
-        //         filteredObj[key] = val
-        //     }
-        // })
-        console.log(req.file)
+        
         if(req.file)
         {
 
-            filteredObj.photo = req.file.filename;
-            console.log(filteredObj)
+            filteredObj.photo = req.file.path;
         }
         const updatedUser = await userModel.findByIdAndUpdate(req.user.id,
             filteredObj,

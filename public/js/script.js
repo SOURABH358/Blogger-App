@@ -12,6 +12,7 @@ const deleteAccount = document.querySelector('.update__links .delete')
 const changedPasswordForm = document.getElementById('change_password')
 const changePassword = document.querySelector('.update__links .ChangePassword')
 const createForm = document.querySelector('#create__form')
+const signUp  = document.querySelector('.actions p')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -27,7 +28,14 @@ function showAlert(type, message) {
 
 if (signup) {
 
-    signup.addEventListener('click', () => {
+    signUp.addEventListener('click', () => {
+        signupForm.classList.add('show__form')
+        layover.classList.add('show__layover')
+    })
+}
+if(signUp){
+    signUp.addEventListener('click', () => {
+        loginForm.classList.remove('show__form')
         signupForm.classList.add('show__form')
         layover.classList.add('show__layover')
     })
@@ -288,7 +296,7 @@ if(createForm)
         try{
             const title = document.getElementById('title').value
             const tags = document.getElementById('tags').value
-            .split(",").map(el=>{
+            .split(", ").map(el=>{
                 return el.split(" ").map(str=>{
                     return str[0].toUpperCase() + str.substr(1)
                 }).join(" ")

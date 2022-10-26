@@ -281,6 +281,10 @@ a{
     height: 2rem;
     padding: 0 0.5rem;
     font-size: 1.2rem;
+    background-color: transparent;
+    border:none;
+    border-bottom: 2px solid white;
+    color:white;
 }
 .user_details input:focus{
     outline: none;
@@ -374,6 +378,14 @@ a{
     font-size: 1.1rem;
     cursor: pointer;
     border-radius: .25rem;
+}
+.actions{
+    display: flex;
+    justify-content: space-between;
+}
+.actions a, .actions p{
+    text-decoration: underline;
+    cursor: pointer;
 }
 .signup{
     height: 80vh;
@@ -548,10 +560,12 @@ a{
     display: flex;
     justify-content: space-between;
 }
+.blog_content_container{
+    padding: 2rem 0;
+}
 .blog__content{
     font-size: 1.25rem;
     line-height: 3rem;
-    padding: 2rem 0;
     word-spacing: 0.5rem;
 }
 .error_container{

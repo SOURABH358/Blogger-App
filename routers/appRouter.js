@@ -50,7 +50,7 @@ router
 
 router
 .route('/user/updateuser')
-.patch( authControllers.protect,userController.uploadAvatar,userController.resizePhoto,userController.updateUser)
+.patch( authControllers.protect,userController.uploadAvatar,userController.updateUser)
 
 router
 .route('/user/deleteuser')

@@ -13,5 +13,8 @@ block content
                 p= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
             .blog__hero
                 img(src='/images/blog-bg.jpg' alt='blog_hero')
-                p.blog__content= blog.content
+            .blog_content_container
+                each para in blog.content.split("\n")
+                    p.blog__content= para 
+                    br
         

@@ -15,34 +15,21 @@ block content
             p.blogs__heading Blogs
             
             .blogs_container
-                .blog_card
-                    .blog_bg
-                        img(src='../images/blog-bg.jpg' alt='blog-bg')
-                    .blog_info
-                        p.blog_title An Intro to Web Development
-                        .blog_inscript
-                            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
-                            | aperiam!
-                        .blog_create
-                            div Date: 06/10/2022
-                            div Author: Sourabh Yadav
-                        .tags
-                            span Web development
-                            span Programming
-                .blog_card
-                    .blog_bg
-                        img(src='../images/blog-bg.jpg' alt='blog-bg')
-                    .blog_info
-                        p.blog_title An Intro to Web Development
-                        .blog_inscript
-                            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
-                            | aperiam!
-                        .blog_create
-                            div Date: 06/10/2022
-                            div Author: Sourabh Yadav
-                        .tags
-                            span Web development
-                            span Programming
+                each blog,index in blogs 
+                    if(index < 2)
+                        a(href= blog.slug?`http://127.0.0.1:3000/blogger/blogs/${blog.slug}`:'#').blog_card
+                            .blog_bg
+                                img(src='../images/blog-bg.jpg' alt='blog-bg')
+                            .blog_info
+                                p.blog_title #{blog.title}
+                                .blog_inscript= blog.content.substr(0,100)
+                                .blog_create
+                                    p= blog.createdAt.toLocaleString('en-US',{year: 'numeric', month: 'long',day: 'numeric'})
+                                    p #{blog.Author.userName}
+                                .tags
+                                    each tag in blog.tags 
+                                        span #{tag}
+                    
 
             .get__more
                 a(href='http://127.0.0.1:3000/blogger/blogs') Get More

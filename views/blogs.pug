@@ -10,7 +10,7 @@ block content
             
         .blogs_container
             each blog in blogs
-                .blog_card
+                a(href= `http://127.0.0.1:3000/blogger/${blog.slug}`).blog_card
                     .blog_bg
                         img(src='../images/blog-bg.jpg' alt='blog-bg')
                     .blog_info

@@ -28,7 +28,7 @@ function showAlert(type, message) {
 
 if (signup) {
 
-    signUp.addEventListener('click', () => {
+    signup.addEventListener('click', () => {
         signupForm.classList.add('show__form')
         layover.classList.add('show__layover')
     })

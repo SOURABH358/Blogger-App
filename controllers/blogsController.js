@@ -92,7 +92,20 @@ exports.createBlog = async (req,res, next)=>{
 exports.getBlog = async (req,res,next)=>{
     try{
     const blog = await blogModels.findOne({slug: req.params.slug}).populate('Author')
-    
+    // if(req.user){
+    //     console.log(req.user.id)
+    //     console.log(blog.Author.id)
+    //     if(req.user.id === blog.Author.id)
+    //     {
+    //         res.locals.editable = true;
+    //     }
+    //     else{
+    //         res.locals.editable = false;
+    //     }
+    // }
+    // else{
+    //     res.locals.editable = false
+    // }
     res.status(201)
     .render('blog_template',{
         blog

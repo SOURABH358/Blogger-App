@@ -15,13 +15,7 @@ block content
             else
                 .blogs_container
                     each blog in blogs
-                        
                         a(href= blog.slug?`http://127.0.0.1:3000/blogger/blogs/${blog.slug}`:'#').blog_card
-                            .blogs_edit_icons 
-                                div#edit_blog
-                                    img(src = "../images/pen.png")
-                                div#delete_blog
-                                    img(src = "../images/bin.png")
                             .blog_bg
                                 img(src= blog.hero?`../../${blog.hero}`:'../images/blog-bg.jpg' alt='blog-bg')
                             .blog_info

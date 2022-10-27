@@ -1,4 +1,3 @@
-
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')
 const signupForm = document.getElementById('signup__form')
@@ -14,6 +13,8 @@ const changePassword = document.querySelector('.update__links .ChangePassword')
 const createForm = document.querySelector('#create__form')
 const signUp = document.querySelector('.actions p')
 const deleteProfilePic = document.querySelector('.deleteProfilePic')
+const editBlog = document.querySelectorAll('.edit_blog')
+const deleteBlog = document.querySelectorAll('.delete_blog')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -343,4 +344,30 @@ if (createForm) {
             }, 1500)
         }
     })
+}
+
+if(editBlog){
+
+}
+
+if(deleteBlog)
+{
+   deleteBlog.forEach(el=>{
+    el.addEventListener('click',async (e)=>{
+        try{
+            const blogCard = e.currentTarget.parentElement.parentElement;
+            const slug = blogCard.querySelector('h1').innerText.toLowerCase().split(" ").join("-");
+
+            const res = await axios({
+                method: 'DELETE',
+                url: 'http://127.0.0.1:3000/blogger/blogs/delete',
+                data:{
+                    slug
+                }
+            })
+        }catch(error){
+
+        }
+    })
+   })
 }

@@ -70,6 +70,8 @@ router
 .route('/user/deletepic')
 .patch( authControllers.protect, userController.deletePic)
 
-
+router
+.route('/blogs/delete')
+.delete()
 
 module.exports = router;

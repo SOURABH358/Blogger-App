@@ -554,10 +554,10 @@ a{
     display: flex;
     position: absolute;
     width: 5rem;
-    top: 40%;
-    left: 50%;
+    top: 4rem;
+    right: 7rem;
     transform: translate(-50%,-50%);
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
     z-index: 999;
 }
@@ -565,6 +565,7 @@ a{
     background-color: rgb(227, 11, 92);
     padding: 0.5rem;
     border-radius: 50%;
+    cursor: pointer;
 }
 .blogs_edit_icons img{
     width: 1.5rem;
@@ -576,6 +577,7 @@ a{
 .blog__template{
     color: white;
     padding: 2rem 8rem;
+    position: relative;
 }
 .blog__template h1{
     font-size: 4rem;

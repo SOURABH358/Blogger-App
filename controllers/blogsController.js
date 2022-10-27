@@ -109,9 +109,28 @@ exports.deleteBlog = async (req,res,next)=>{
         const blog = await blogModels.findOne({slug:req.body.slug}).populate('Author')
         if(req.user.id.toString()!==blog.Author.id.toString())
         {
-            throw 'You are not authorized to delete blog';
+            throw 'You are not authorized to delete this blog';
         }
         await blogModels.findByIdAndDelete(blog.id)
+        res.status(201)
+        .json({status: 'success'})
+    }catch(error)
+    {
+        res.status(404)
+        .json({
+            status:'failure',
+            error
+        })
+    }
+}
+
+exports.editBlog = async (req,res,next)=>{
+    try{
+        const blog = await blogModels.findOne({slug:req.body.slug}).populate('Author')
+        if(req.user.id.toString()!==blog.Author.id.toString())
+        {
+            throw 'You are not authorized to edit this blog';
+        }
         res.status(201)
         .json({status: 'success'})
     }catch(error)

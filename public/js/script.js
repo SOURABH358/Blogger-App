@@ -347,7 +347,35 @@ if (createForm) {
 }
 
 if(editBlog){
-
+    editBlog.forEach(el=>{
+        el.addEventListener('click',async (e)=>{
+            try{
+                const blogCard = e.currentTarget.parentElement.parentElement;
+                const slug = blogCard.querySelector('h1').innerText.toLowerCase().split(" ").join("-");
+    
+                const res = await axios({
+                    method: 'PATCH',
+                    url: 'http://127.0.0.1:3000/blogger/blogs/edit',
+                    data:{
+                        slug
+                    }
+                })
+                if(res.data.status === 'success')
+                {
+                    showAlert('success', 'Blog Updated successfully!')
+                    window.setTimeout(() => {
+                        hideAlert();
+                        location.assign('/blogger/blogs')
+                    }, 1500)
+                }
+            }catch(error){
+                showAlert('error', error.response.data.error)
+                window.setTimeout(() => {
+                    hideAlert();
+                }, 1500)
+            }
+        })
+       })
 }
 
 if(deleteBlog)

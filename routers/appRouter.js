@@ -74,4 +74,8 @@ router
 .route('/blogs/delete')
 .delete(authControllers.protect, blogsControllers.deleteBlog)
 
+router
+.route('/blogs/edit')
+.patch(authControllers.protect, blogsControllers.editBlog)
+
 module.exports = router;

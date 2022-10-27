@@ -109,6 +109,7 @@ a{
     height: 2.5rem;
     border-radius: 50%;
     border: 2px solid #282C35;
+    background-color: lightgrey;
 }
 .filter{
     width: 80%;
@@ -156,6 +157,7 @@ a{
     padding: 1rem;
     color: black;
     background-color: white;
+    position: relative;
 }
 .blog_card .blog_bg{
     overflow: hidden;
@@ -530,6 +532,8 @@ a{
     background-color: rgb(227, 11, 92);
     color: white
 }
+/* My blogs */
+
 .myblogs h1{
     font-size: 3rem;
     color: white;
@@ -546,6 +550,29 @@ a{
     padding: 2rem;
     margin-bottom: 4rem;
 }
+.blogs_edit_icons{
+    display: flex;
+    position: absolute;
+    width: 5rem;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    gap: 1rem;
+    align-items: center;
+    z-index: 999;
+}
+.blogs_edit_icons div{
+    background-color: rgb(227, 11, 92);
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+.blogs_edit_icons img{
+    width: 1.5rem;
+}
+
+/* Blog Template */
+
+
 .blog__template{
     color: white;
     padding: 2rem 8rem;
@@ -555,6 +582,7 @@ a{
     text-align: center;
     margin-bottom: 2rem;
 }
+
 .blog__template .blog__hero{
     width: 100%;
     margin: 2rem 0;

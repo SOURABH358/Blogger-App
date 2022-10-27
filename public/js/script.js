@@ -12,7 +12,8 @@ const deleteAccount = document.querySelector('.update__links .delete')
 const changedPasswordForm = document.getElementById('change_password')
 const changePassword = document.querySelector('.update__links .ChangePassword')
 const createForm = document.querySelector('#create__form')
-const signUp  = document.querySelector('.actions p')
+const signUp = document.querySelector('.actions p')
+const deleteProfilePic = document.querySelector('.deleteProfilePic')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -33,7 +34,7 @@ if (signup) {
         layover.classList.add('show__layover')
     })
 }
-if(signUp){
+if (signUp) {
     signUp.addEventListener('click', () => {
         loginForm.classList.remove('show__form')
         signupForm.classList.add('show__form')
@@ -51,24 +52,22 @@ if (login) {
 //     userInfoForm.classList.add('show__form')
 //     layover.classList.add('show__layover')
 // })
-if(deleteAccount){
+if (deleteAccount) {
 
-    deleteAccount.addEventListener('click',async ()=>{
-        try{
+    deleteAccount.addEventListener('click', async () => {
+        try {
             const res = await axios({
                 method: 'DELETE',
                 url: 'http://127.0.0.1:3000/blogger/user/deleteuser'
             })
-            if(res.data.status = 'success')
-            {
+            if (res.data.status = 'success') {
                 showAlert('success', 'User successfully deleted!')
-                window.setTimeout(()=>{
+                window.setTimeout(() => {
                     hideAlert();
                     location.assign('/blogger/home')
-                },1500)
+                }, 1500)
             }
-        }catch(error)
-        {
+        } catch (error) {
             showAlert('error', error.response.data.error)
             window.setTimeout(() => {
                 hideAlert();
@@ -77,16 +76,39 @@ if(deleteAccount){
     })
 }
 
-if(changePassword)
-{
+if (changePassword) {
     changePassword.addEventListener('click', () => {
         changedPasswordForm.classList.add('show__form')
         layover.classList.add('show__layover')
-    })   
+    })
 }
+if (deleteProfilePic) {
+    deleteProfilePic.addEventListener('click', async () => {
+        try {
+            const res = await axios({
+                method: 'PATCH',
+                url: 'http://127.0.0.1:3000/blogger/user/deletepic',
+                data:{
 
-if(close)
-{
+                }
+            })
+            if (res.data.status === 'success') {
+                showAlert('success', 'Profile pic deleted successfully!')
+                window.setTimeout(() => {
+                    hideAlert();
+                }, 1500)
+            }
+        } catch (error) {
+            console.log(error)
+            showAlert('error', error)
+            window.setTimeout(() => {
+                hideAlert();
+            }, 1500)
+        }
+    })
+
+}
+if (close) {
     close.forEach(ele => {
         ele.addEventListener('click', () => {
             signupForm.classList.remove('show__form')
@@ -98,8 +120,7 @@ if(close)
     })
 }
 
-if(loginForm)
-{
+if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault()
         try {
@@ -128,12 +149,12 @@ if(loginForm)
                 hideAlert();
             }, 1500)
         }
-    
+
     })
 }
 
 
-if(logOut){
+if (logOut) {
     logOut.addEventListener('click', async () => {
         try {
             const res = await axios({
@@ -148,17 +169,16 @@ if(logOut){
                 }, 1500);
             }
         } catch (error) {
-    
+
         }
     })
 
 }
-if(signupForm)
-{
+if (signupForm) {
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-    
-    
+
+
         try {
             const userName = document.querySelector('#name input').value
             const password = document.querySelector('#signuppassword input').value
@@ -192,12 +212,11 @@ if(signupForm)
     })
 }
 
-if(userInfoForm)
-{
-    userInfoForm.addEventListener('submit',async (e)=>{
+if (userInfoForm) {
+    userInfoForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-    
-        try{
+
+        try {
             const userName = document.querySelector('#userName input').value
             const website = document.querySelector('#website input').value
             const country = document.querySelector('#country input').value
@@ -208,78 +227,74 @@ if(userInfoForm)
             const instagram = document.querySelector('#instagram input').value
             const github = document.querySelector('#github input').value
             const photo = document.getElementById('photo').files[0];
-            if(userName==='')
-            {
+            if (userName === '') {
                 throw 'Please provie userName'
             }
-            else{
+            else {
                 const data = new FormData();
-                data.append('userName',userName)
-                data.append('website',website)
-                data.append('country',country)
-                data.append('state',state)
-                data.append('city',city)
-                data.append('linkedin',linkedin)
-                data.append('twitter',twitter)
-                data.append('instagram',instagram)
-                data.append('github',github)
-                data.append('photo',photo)
+                data.append('userName', userName)
+                data.append('website', website)
+                data.append('country', country)
+                data.append('state', state)
+                data.append('city', city)
+                data.append('linkedin', linkedin)
+                data.append('twitter', twitter)
+                data.append('instagram', instagram)
+                data.append('github', github)
+                data.append('photo', photo)
                 const res = await axios({
                     method: 'PATCH',
                     url: 'http://127.0.0.1:3000/blogger/user/updateuser',
                     data
-                    
+
                 })
-                if(res.data.status === 'success')
-                {
+                if (res.data.status === 'success') {
                     showAlert('success', 'Data Updated Successfully!')
                     window.setTimeout(() => {
                         hideAlert();
                         // location.assign('/blogger/account')
                     }, 1500);
                 }
-                else{
+                else {
                     console.log(error)
                 }
 
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
             showAlert('error', error);
-            window.setTimeout(()=>{
+            window.setTimeout(() => {
                 hideAlert()
-            },1500)
+            }, 1500)
         }
     })
 }
 
-if(changedPasswordForm)
-{
-    changedPasswordForm.addEventListener('submit',async (e)=>{
+if (changedPasswordForm) {
+    changedPasswordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        try{
+        try {
             const currentPassword = document.querySelector('.currentPassword input').value
             const newPassword = document.querySelector('.newPassword input').value
             const confirmNewPassword = document.querySelector('.confirmNewPassword input').value
             const res = await axios({
                 method: 'PATCH',
                 url: 'http://127.0.0.1:3000/blogger/user/changepassword',
-                data:{
-                    currentPassword, 
+                data: {
+                    currentPassword,
                     newPassword,
                     confirmNewPassword
                 }
             })
-            if(res.data.status === 'success')
-            {
+            if (res.data.status === 'success') {
                 showAlert('success', 'Password successfully updated')
                 changedPasswordForm.classList.remove('show__form')
-                window.setTimeout(()=>{
+                window.setTimeout(() => {
                     hideAlert();
                     location.assign('/blogger/account')
-                },1500)
+                }, 1500)
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
             showAlert('error', error)
             window.setTimeout(() => {
@@ -289,18 +304,17 @@ if(changedPasswordForm)
     })
 }
 
-if(createForm)
-{
-    createForm.addEventListener('submit',async (e)=>{
+if (createForm) {
+    createForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        try{
+        try {
             const title = document.getElementById('title').value
             const tags = document.getElementById('tags').value
-            .split(", ").map(el=>{
-                return el.split(" ").map(str=>{
-                    return str[0].toUpperCase() + str.substr(1)
-                }).join(" ")
-            })
+                .split(", ").map(el => {
+                    return el.split(" ").map(str => {
+                        return str[0].toUpperCase() + str.substr(1)
+                    }).join(" ")
+                })
             const hero = document.querySelector('#image input').files[0]
             const content = document.getElementById('content').value
 
@@ -314,21 +328,19 @@ if(createForm)
                 url: 'http://127.0.0.1:3000/blogger/user/createblog',
                 data
             })
-            if(res.data.status === 'success')
-            {
+            if (res.data.status === 'success') {
                 showAlert('success', 'Blog published successfully!')
-                window.setTimeout(()=>{
+                window.setTimeout(() => {
                     hideAlert();
                     location.assign('/blogger/create')
-                },1500)
+                }, 1500)
             }
-        }catch(error)
-        {
+        } catch (error) {
             console.log(error)
             showAlert('error', error)
-            window.setTimeout(()=>{
+            window.setTimeout(() => {
                 hideAlert();
-            },1500)
+            }, 1500)
         }
     })
 }

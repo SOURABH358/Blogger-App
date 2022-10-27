@@ -5,13 +5,14 @@ block content
     .user_container
       .update__links
         //- p.ChangeProfilePic Change Profile pic
+        p.deleteProfilePic Delete Profile pic
         p.ChangePassword Change Password
         p.logOut Log Out
         p.delete Delete Account
       form.user_info
         .user_pic
           div
-            img.user_photo(src= `../${user.photo}`)
+            img.user_photo(src= user.photo ?`../../${user.photo}`:'../../users/default.png')
           input(type = "file", accept  = "image/*", id = "photo", name = "photo")
           label(for = "photo") Choose
         #userName.user_details

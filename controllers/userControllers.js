@@ -234,3 +234,20 @@ exports.changePassword = async (req,res,next)=>{
         })
     }
 }
+
+exports.deletePic = async (req,res,next)=>{
+    try{
+        const user = await userModel.findByIdAndUpdate(req.user.id, {photo: ''})
+        console.log('hello')
+        res.status(201)
+        .json({
+            status:'success'
+        })
+    }catch(error){
+        res.status(404)
+        .render('error',{
+            message: error
+        })
+    }
+
+}

@@ -4,12 +4,11 @@ block content
 
     main
         section.blog__template
-            if(editable)
-                .blogs_edit_icons 
-                    div.edit_blog
-                        img(src = "../../images/pen.png")
-                    div.delete_blog
-                        img(src = "../../images/bin.png")
+            .blogs_edit_icons 
+                div.edit_blog
+                    img(src = "../../images/pen.png")
+                div.delete_blog
+                    img(src = "../../images/bin.png")
             h1= blog.title
             .blog__tags
                 each tag in blog.tags 

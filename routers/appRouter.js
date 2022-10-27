@@ -72,6 +72,6 @@ router
 
 router
 .route('/blogs/delete')
-.delete()
+.delete(authControllers.protect, blogsControllers.deleteBlog)
 
 module.exports = router;

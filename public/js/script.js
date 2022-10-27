@@ -205,7 +205,7 @@ if (signupForm) {
                 }, 1500);
             }
         } catch (error) {
-            showAlert('error', error.response.data.message)
+            showAlert('error', error.response.data)
             window.setTimeout(() => {
                 hideAlert()
             }, 1500)
@@ -365,8 +365,19 @@ if(deleteBlog)
                     slug
                 }
             })
+            if(res.data.status === 'success')
+            {
+                showAlert('success', 'Blog deleted successfully!')
+                window.setTimeout(() => {
+                    hideAlert();
+                    location.assign('/blogger/blogs')
+                }, 1500)
+            }
         }catch(error){
-
+            showAlert('error', error.response.data.error)
+            window.setTimeout(() => {
+                hideAlert();
+            }, 1500)
         }
     })
    })

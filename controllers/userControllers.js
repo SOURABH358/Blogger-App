@@ -105,7 +105,8 @@ exports.signUpUser = async (req, res, next) => {
             userName,
             email,
             password,
-            confirmPassword
+            confirmPassword,
+            photo: ''
         })
         
         createSendToken(user, 201, res)

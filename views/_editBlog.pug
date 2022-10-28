@@ -1,0 +1,11 @@
+form#update__form
+    div
+        input#update__title(type='text' placeholder='Title' required='')
+    div
+        input#update__tags(type='text' placeholder='Tags : blogging, web' required='')
+    div#update__image
+        input(type = "file" accept = "image/*" id = "hero" name = "hero")
+        label(for = "hero") Choose Image
+    div
+        textarea#update__content(placeholder='Your Content' required='')
+    button#update(type='submit') Update

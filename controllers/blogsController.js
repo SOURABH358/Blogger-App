@@ -132,7 +132,10 @@ exports.editBlog = async (req,res,next)=>{
             throw 'You are not authorized to edit this blog';
         }
         res.status(201)
-        .json({status: 'success'})
+        .json({
+            status:'success',
+            blog
+        })
     }catch(error)
     {
         res.status(404)

@@ -76,6 +76,6 @@ router
 
 router
 .route('/blogs/edit')
-.patch(authControllers.protect, blogsControllers.editBlog)
+.post(authControllers.protect, blogsControllers.editBlog)
 
 module.exports = router;

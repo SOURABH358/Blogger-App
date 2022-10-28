@@ -15,6 +15,7 @@ const signUp = document.querySelector('.actions p')
 const deleteProfilePic = document.querySelector('.deleteProfilePic')
 const editBlog = document.querySelectorAll('.edit_blog')
 const deleteBlog = document.querySelectorAll('.delete_blog')
+const updateForm = document.querySelector('#update__form')
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -354,7 +355,7 @@ if(editBlog){
                 const slug = blogCard.querySelector('h1').innerText.toLowerCase().split(" ").join("-");
     
                 const res = await axios({
-                    method: 'PATCH',
+                    method: 'POST',
                     url: 'http://127.0.0.1:3000/blogger/blogs/edit',
                     data:{
                         slug
@@ -362,14 +363,10 @@ if(editBlog){
                 })
                 if(res.data.status === 'success')
                 {
-                    showAlert('success', 'Blog Updated successfully!')
-                    window.setTimeout(() => {
-                        hideAlert();
-                        location.assign('/blogger/blogs')
-                    }, 1500)
+                    
                 }
             }catch(error){
-                showAlert('error', error.response.data.error)
+                showAlert('error', error)
                 window.setTimeout(() => {
                     hideAlert();
                 }, 1500)

@@ -67,6 +67,10 @@ router
 .post( authControllers.protect,blogsControllers.uploadBG, blogsControllers.createBlog)
 
 router
+.route('/user/updateblog')
+.post( authControllers.protect,blogsControllers.uploadBG, blogsControllers.updateBlog)
+
+router
 .route('/user/deletepic')
 .patch( authControllers.protect, userController.deletePic)
 
@@ -76,6 +80,6 @@ router
 
 router
 .route('/blogs/edit')
-.post(authControllers.protect, blogsControllers.editBlog)
+.patch(authControllers.protect, blogsControllers.editBlog)
 
 module.exports = router;

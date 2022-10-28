@@ -15,7 +15,8 @@ const signUp = document.querySelector('.actions p')
 const deleteProfilePic = document.querySelector('.deleteProfilePic')
 const editBlog = document.querySelectorAll('.edit_blog')
 const deleteBlog = document.querySelectorAll('.delete_blog')
-const updateForm = document.querySelector('#update__form')
+const updateForm = document.querySelector('.update__form')
+let BlogId;
 
 function hideAlert() {
     const alert = document.querySelector('.alert')
@@ -355,7 +356,7 @@ if(editBlog){
                 const slug = blogCard.querySelector('h1').innerText.toLowerCase().split(" ").join("-");
     
                 const res = await axios({
-                    method: 'POST',
+                    method: 'PATCH',
                     url: 'http://127.0.0.1:3000/blogger/blogs/edit',
                     data:{
                         slug
@@ -363,7 +364,14 @@ if(editBlog){
                 })
                 if(res.data.status === 'success')
                 {
-                    
+                    updateForm.classList.add('show__update__form')
+                    const title = document.querySelector('#update__title')
+                    const tags = document.querySelector('#update__tags')
+                    const content = document.querySelector('#update__content')
+                    title.value = res.data.blog.title
+                    tags.value = res.data.blog.tags.join(", ")
+                    content.value = res.data.blog.content;
+                    BlogId = res.data.blog._id
                 }
             }catch(error){
                 showAlert('error', error)
@@ -406,4 +414,47 @@ if(deleteBlog)
         }
     })
    })
+}
+
+if (updateForm) {
+    updateForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+            const title = document.getElementById('update__title').value
+            const tags = document.getElementById('update__tags').value
+                .split(", ").map(el => {
+                    return el.split(" ").map(str => {
+                        return str[0].toUpperCase() + str.substr(1)
+                    }).join(" ")
+                })
+            const hero = document.querySelector('#update__image input').files[0]
+            const content = document.getElementById('update__content').value
+
+            const data = new FormData();
+            data.append('title', title)
+            data.append('tags', tags)
+            data.append('hero', hero)
+            data.append('content', content)
+            data.append('id', BlogId)
+            console.log(data)
+            const res = await axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:3000/blogger/user/updateblog',
+                data
+            })
+            if (res.data.status === 'success') {
+                showAlert('success', 'Blog Updated successfully!')
+                window.setTimeout(() => {
+                    hideAlert();
+                    location.assign('/blogger/blogs')
+                }, 1500)
+            }
+        } catch (error) {
+            console.log(error)
+            showAlert('error', error)
+            window.setTimeout(() => {
+                hideAlert();
+            }, 1500)
+        }
+    })
 }

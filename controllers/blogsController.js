@@ -145,7 +145,7 @@ exports.updateBlog = async (req, res, next) => {
         filterBody.slug = req.body.title.toLowerCase().split(" ").join("-")
         filterBody.Author = req.user.id;
 
-        if (filterBody.hero && req.file) {
+        if (req.file) {
             filterBody.hero = req.file.path
         }
         else {

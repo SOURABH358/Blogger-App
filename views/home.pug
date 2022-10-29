@@ -17,7 +17,7 @@ block content
             .blogs_container
                 each blog,index in blogs 
                     if(index < 2)
-                        a(href= blog.slug?`http://127.0.0.1:3000/blogger/blogs/${blog.slug}`:'#').blog_card
+                        a(href= blog.slug?`http://127.0.0.1:3000/blogs/${blog.slug}`:'#').blog_card
                             .blog_bg
                                 img(src= `../../${blog.hero}` alt='blog-bg')
                             .blog_info
@@ -32,4 +32,4 @@ block content
                     
 
             .get__more
-                a(href='http://127.0.0.1:3000/blogger/blogs') Get More
+                a(href='http://127.0.0.1:3000/blogs') Get More

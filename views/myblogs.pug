@@ -8,14 +8,14 @@ block content
                 p Search By Tags
                 .blog__tags 
                     each tag in tagsList 
-                        a(href = `/blogger/blogs?tags=${tag}`).blog__tag #{tag}
+                        a(href = `/blogs?tags=${tag}`).blog__tag #{tag}
             if !blogs.length
                 .blogs__empty 
                     div You do not have any blogs
             else
                 .blogs_container
                     each blog in blogs
-                        a(href= blog.slug?`http://127.0.0.1:3000/blogger/blogs/${blog.slug}`:'#').blog_card
+                        a(href= blog.slug?`http://127.0.0.1:3000/blogs/${blog.slug}`:'#').blog_card
                             .blog_bg
                                 img(src= blog.hero?`../../${blog.hero}`:'../images/blog-bg.jpg' alt='blog-bg')
                             .blog_info

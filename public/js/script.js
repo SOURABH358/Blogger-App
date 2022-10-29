@@ -63,7 +63,7 @@ if (deleteAccount) {
         try {
             const res = await axios({
                 method: 'DELETE',
-                url: 'http://127.0.0.1:3000/blogger/user/deleteuser'
+                url: 'http://127.0.0.1:3000/user/deleteuser'
             })
             if (res.data.status = 'success') {
                 showAlert('success', 'User successfully deleted!')
@@ -92,7 +92,7 @@ if (deleteProfilePic) {
         try {
             const res = await axios({
                 method: 'PATCH',
-                url: 'http://127.0.0.1:3000/blogger/user/deletepic',
+                url: 'http://127.0.0.1:3000/user/deletepic',
                 data:{
 
                 }
@@ -133,7 +133,7 @@ if (loginForm) {
             const password = document.querySelector('#loginpassword input').value
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/blogger/user/login',
+                url: 'http://127.0.0.1:3000/user/login',
                 data: {
                     email,
                     password
@@ -149,7 +149,7 @@ if (loginForm) {
                 }, 1500)
             }
         } catch (error) {
-            showAlert('error', error.response.data.error)
+            showAlert('error', error)
             window.setTimeout(() => {
                 hideAlert();
             }, 1500)
@@ -164,7 +164,7 @@ if (logOut) {
         try {
             const res = await axios({
                 method: 'GET',
-                url: 'http://127.0.0.1:3000/blogger/user/logout',
+                url: 'http://127.0.0.1:3000/user/logout',
             })
             if (res.data.status === 'success') {
                 showAlert('success', 'User successfully logged Out!');
@@ -191,7 +191,7 @@ if (signupForm) {
             const email = document.querySelector('#signupemail input').value
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/blogger/user/signup',
+                url: 'http://127.0.0.1:3000/user/signup',
                 data: {
                     userName,
                     email,
@@ -250,7 +250,7 @@ if (userInfoForm) {
                 data.append('photo', photo)
                 const res = await axios({
                     method: 'PATCH',
-                    url: 'http://127.0.0.1:3000/blogger/user/updateuser',
+                    url: 'http://127.0.0.1:3000/user/updateuser',
                     data
 
                 })
@@ -285,7 +285,7 @@ if (changedPasswordForm) {
             const confirmNewPassword = document.querySelector('.confirmNewPassword input').value
             const res = await axios({
                 method: 'PATCH',
-                url: 'http://127.0.0.1:3000/blogger/user/changepassword',
+                url: 'http://127.0.0.1:3000/user/changepassword',
                 data: {
                     currentPassword,
                     newPassword,
@@ -331,7 +331,7 @@ if (createForm) {
             data.append('content', content)
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/blogger/user/createblog',
+                url: 'http://127.0.0.1:3000/user/createblog',
                 data
             })
             if (res.data.status === 'success') {
@@ -360,7 +360,7 @@ if(editBlog){
     
                 const res = await axios({
                     method: 'PATCH',
-                    url: 'http://127.0.0.1:3000/blogger/blogs/edit',
+                    url: 'http://127.0.0.1:3000/blogs/edit',
                     data:{
                         slug
                     }
@@ -396,7 +396,7 @@ if(deleteBlog)
 
             const res = await axios({
                 method: 'DELETE',
-                url: 'http://127.0.0.1:3000/blogger/blogs/delete',
+                url: 'http://127.0.0.1:3000/blogs/delete',
                 data:{
                     slug
                 }
@@ -442,7 +442,7 @@ if (updateForm) {
             console.log(data)
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/blogger/user/updateblog',
+                url: 'http://127.0.0.1:3000/user/updateblog',
                 data
             })
             if (res.data.status === 'success') {

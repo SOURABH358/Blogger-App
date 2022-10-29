@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')

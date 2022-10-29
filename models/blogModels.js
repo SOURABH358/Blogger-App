@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const BlogsSchema = new mongoose.Schema({
     title: {
         type: String,
+        unique: true,
         required: [true, 'Please a title for your Blog']
     },
     content: {

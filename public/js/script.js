@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')
 const signupForm = document.getElementById('signup__form')
@@ -207,7 +209,8 @@ if (signupForm) {
                 }, 1500);
             }
         } catch (error) {
-            showAlert('error', error.response.data)
+            console.log(error)
+            showAlert('error', error)
             window.setTimeout(() => {
                 hideAlert()
             }, 1500)
@@ -340,7 +343,7 @@ if (createForm) {
             }
         } catch (error) {
             console.log(error)
-            showAlert('error', error)
+            showAlert('error', error.response.data.message)
             window.setTimeout(() => {
                 hideAlert();
             }, 1500)

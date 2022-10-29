@@ -56,7 +56,7 @@ exports.getHome = async (req, res, next) => {
 exports.getMyBlogs = async (req, res, next) => {
     res.locals.current = 'myBlogs';
     const blogs = await blogModels.find({ Author: req.user.id }).populate('Author').sort('-createdAt')
-    const newList = blogs.map(el => el.tags.join(",")).join(",").split(",")
+    const newList = blogs.map(el => el.tags.join(",")).join(",").split(", ")
     const tagsList = [...new Set(newList)]
     res.status(201)
         .render('myblogs', {
@@ -71,12 +71,16 @@ exports.newBlog = (req, res, next) => {
         .render('create')
 }
 exports.createBlog = async (req, res, next) => {
+   try{
     const filterBody = { ...req.body };
     filterBody.slug = req.body.title.toLowerCase().split(" ").join("-")
     filterBody.Author = req.user.id;
 
     if (req.file) {
         filterBody.hero = req.file.path
+    }
+    else{
+        throw 'Please provide background for your blog';
     }
     const blog = await blogModels.create(filterBody);
     res.status(200).json({
@@ -85,6 +89,13 @@ exports.createBlog = async (req, res, next) => {
             blog
         }
     })
+   }catch(error){
+    res.status('404')
+    .json({
+        status: 'failure',
+        message: error
+    })
+   }
 }
 
 exports.getBlog = async (req, res, next) => {

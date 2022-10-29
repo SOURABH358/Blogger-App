@@ -11,7 +11,7 @@ block content
         if blogs.length 
             .blogs_container
                 each blog in blogs
-                    a(href= blog.slug?`http://127.0.0.1:3000/blogs/${blog.slug}`:'#').blog_card
+                    a(href= blog.slug?`/blogs/${blog.slug}`:'#').blog_card
                         .blog_bg
                             img(src= blog.hero?`../../${blog.hero}`:'../images/blog-bg.jpg' alt='blog-bg')
                         .blog_info

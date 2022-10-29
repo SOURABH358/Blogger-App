@@ -1,6 +1,6 @@
 nav.navbar
   .title
-    a(href = "http://127.0.0.1:3000/home") Blogger
+    a(href = "/home") Blogger
   ul.tabs
     li
       a(href='/home' class= current==='home'?"highlight":"") Home
@@ -13,7 +13,7 @@ nav.navbar
   if user
     .account
       p= user.userName.split(" ")[0]
-      a(href = "http://127.0.0.1:3000/account")
+      a(href = "/account")
         img.user__image(src= user.photo ?`../../${user.photo}`:'../../users/default.png')
           
   else

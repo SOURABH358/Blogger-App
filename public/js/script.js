@@ -133,7 +133,7 @@ if (loginForm) {
             const password = document.querySelector('#loginpassword input').value
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/user/login',
+                url: '/user/login',
                 data: {
                     email,
                     password
@@ -149,6 +149,7 @@ if (loginForm) {
                 }, 1500)
             }
         } catch (error) {
+            console.log(error)
             showAlert('error', error)
             window.setTimeout(() => {
                 hideAlert();

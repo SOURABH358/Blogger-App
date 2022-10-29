@@ -1,4 +1,4 @@
-// import axios from "axios"
+import axios from "axios"
 
 const signup = document.getElementById('signup')
 const login = document.getElementById('login')
@@ -63,7 +63,7 @@ if (deleteAccount) {
         try {
             const res = await axios({
                 method: 'DELETE',
-                url: 'http://127.0.0.1:3000/user/deleteuser'
+                url: '/user/deleteuser'
             })
             if (res.data.status = 'success') {
                 showAlert('success', 'User successfully deleted!')
@@ -92,7 +92,7 @@ if (deleteProfilePic) {
         try {
             const res = await axios({
                 method: 'PATCH',
-                url: 'http://127.0.0.1:3000/user/deletepic',
+                url: '/user/deletepic',
                 data:{
 
                 }
@@ -165,7 +165,7 @@ if (logOut) {
         try {
             const res = await axios({
                 method: 'GET',
-                url: 'http://127.0.0.1:3000/user/logout',
+                url: '/user/logout',
             })
             if (res.data.status === 'success') {
                 showAlert('success', 'User successfully logged Out!');
@@ -192,7 +192,7 @@ if (signupForm) {
             const email = document.querySelector('#signupemail input').value
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/user/signup',
+                url: '/user/signup',
                 data: {
                     userName,
                     email,
@@ -251,7 +251,7 @@ if (userInfoForm) {
                 data.append('photo', photo)
                 const res = await axios({
                     method: 'PATCH',
-                    url: 'http://127.0.0.1:3000/user/updateuser',
+                    url: '/user/updateuser',
                     data
 
                 })
@@ -286,7 +286,7 @@ if (changedPasswordForm) {
             const confirmNewPassword = document.querySelector('.confirmNewPassword input').value
             const res = await axios({
                 method: 'PATCH',
-                url: 'http://127.0.0.1:3000/user/changepassword',
+                url: '/user/changepassword',
                 data: {
                     currentPassword,
                     newPassword,
@@ -332,7 +332,7 @@ if (createForm) {
             data.append('content', content)
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/user/createblog',
+                url: '/user/createblog',
                 data
             })
             if (res.data.status === 'success') {
@@ -361,7 +361,7 @@ if(editBlog){
     
                 const res = await axios({
                     method: 'PATCH',
-                    url: 'http://127.0.0.1:3000/blogs/edit',
+                    url: '/blogs/edit',
                     data:{
                         slug
                     }
@@ -397,7 +397,7 @@ if(deleteBlog)
 
             const res = await axios({
                 method: 'DELETE',
-                url: 'http://127.0.0.1:3000/blogs/delete',
+                url: '/blogs/delete',
                 data:{
                     slug
                 }
@@ -443,7 +443,7 @@ if (updateForm) {
             console.log(data)
             const res = await axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:3000/user/updateblog',
+                url: '/user/updateblog',
                 data
             })
             if (res.data.status === 'success') {

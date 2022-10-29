@@ -13,6 +13,6 @@ app.set('view engine','pug')
 app.set('views',path.join(__dirname, './views'))
 
 app.use(CookieParser())
-app.use('/blogger',Approuter)
+app.use('/',Approuter)
 
 module.exports = app;

@@ -69,7 +69,7 @@ if (deleteAccount) {
                 showAlert('success', 'User successfully deleted!')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/home')
+                    location.assign('/home')
                 }, 1500)
             }
         } catch (error) {
@@ -145,7 +145,7 @@ if (loginForm) {
                 layover.classList.remove('show__layover')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/home')
+                    location.assign('/home')
                 }, 1500)
             }
         } catch (error) {
@@ -170,7 +170,7 @@ if (logOut) {
                 showAlert('success', 'User successfully logged Out!');
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/home')
+                    location.assign('/home')
                 }, 1500);
             }
         } catch (error) {
@@ -205,7 +205,7 @@ if (signupForm) {
                 layover.classList.remove('show__layover')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/home')
+                    location.assign('/home')
                 }, 1500);
             }
         } catch (error) {
@@ -297,7 +297,7 @@ if (changedPasswordForm) {
                 changedPasswordForm.classList.remove('show__form')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/account')
+                    location.assign('/account')
                 }, 1500)
             }
         } catch (error) {
@@ -338,7 +338,7 @@ if (createForm) {
                 showAlert('success', 'Blog published successfully!')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/create')
+                    location.assign('/create')
                 }, 1500)
             }
         } catch (error) {
@@ -406,7 +406,7 @@ if(deleteBlog)
                 showAlert('success', 'Blog deleted successfully!')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/blogs')
+                    location.assign('/blogs')
                 }, 1500)
             }
         }catch(error){
@@ -449,7 +449,7 @@ if (updateForm) {
                 showAlert('success', 'Blog Updated successfully!')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/blogger/blogs')
+                    location.assign('/blogs')
                 }, 1500)
             }
         } catch (error) {

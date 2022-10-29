@@ -1,19 +1,19 @@
 nav.navbar
   .title
-    a(href = "http://127.0.0.1:3000/blogger/home") Blogger
+    a(href = "http://127.0.0.1:3000/home") Blogger
   ul.tabs
     li
-      a(href='/blogger/home' class= current==='home'?"highlight":"") Home
+      a(href='/home' class= current==='home'?"highlight":"") Home
     li
-      a(href='/blogger/blogs' class= current==='blogs'?"highlight":"") Blogs
+      a(href='/blogs' class= current==='blogs'?"highlight":"") Blogs
     li
-      a(href='/blogger/myblogs' class= current==='myBlogs'?"highlight":"") My Blogs
+      a(href='/myblogs' class= current==='myBlogs'?"highlight":"") My Blogs
     li
-      a(href='/blogger/create' class= current==='create'?"highlight":"") +Create
+      a(href='/create' class= current==='create'?"highlight":"") +Create
   if user
     .account
       p= user.userName.split(" ")[0]
-      a(href = "http://127.0.0.1:3000/blogger/account")
+      a(href = "http://127.0.0.1:3000/account")
         img.user__image(src= user.photo ?`../../${user.photo}`:'../../users/default.png')
           
   else

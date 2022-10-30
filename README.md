@@ -3,6 +3,7 @@ If you want to start blogging, this App is for you. Create a blog, share your kn
 
 ## Content
 - [Tech Stack Used](#TechStackUsed)
+- [Author](#Author)
 
 ## Tech Stack Used
 - NodeJS
@@ -11,3 +12,6 @@ If you want to start blogging, this App is for you. Create a blog, share your kn
 - CSS
 - MongoDB
 - Mongoose
+
+## Author
+Made With ❤ by **Sourabh Yadav** 

@@ -344,7 +344,7 @@ if (createForm) {
             }
         } catch (error) {
             console.log(error)
-            showAlert('error', error.response.data.message)
+            showAlert('error', error)
             window.setTimeout(() => {
                 hideAlert();
             }, 1500)

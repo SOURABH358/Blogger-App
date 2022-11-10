@@ -1,5 +1,4 @@
 const multer = require('multer')
-const sharp = require('sharp')
 const userModel = require('../models/userModels')
 const jwt = require('jsonwebtoken')
 const emailValidator = require('deep-email-validator')

@@ -14,7 +14,7 @@ nav.navbar
     .account
       p= user.userName.split(" ")[0]
       a(href = "/account")
-        img.user__image(src= user.photo ?`../../${user.photo}`:'../users/default.png')
+        img.user__image(src= user.photo ?`../../${user.photo}`:'../../default.png')
           
   else
     .authenticate 

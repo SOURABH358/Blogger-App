@@ -317,7 +317,7 @@ if (createForm) {
         try {
             const title = document.getElementById('title').value
             const tags = document.getElementById('tags').value
-                .split(", ").map(el => {
+                .split(",").map(el => {
                     return el.split(" ").map(str => {
                         return str[0].toUpperCase() + str.substr(1)
                     }).join(" ")

@@ -82,6 +82,7 @@ exports.createBlog = async (req, res, next) => {
     else{
         throw 'Please provide background for your blog';
     }
+    console.log(filterBody)
     const blog = await blogModels.create(filterBody);
     res.status(200).json({
         status: 'success',

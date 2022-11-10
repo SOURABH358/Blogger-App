@@ -322,7 +322,7 @@ if (createForm) {
                         return str[0].toUpperCase() + str.substr(1)
                     }).join(" ")
                 })
-            const hero = document.querySelector('#image input').files[0]
+            const hero = document.querySelector('#hero').files[0]
             const content = document.getElementById('content').value
 
             const data = new FormData();
@@ -330,6 +330,7 @@ if (createForm) {
             data.append('tags', tags)
             data.append('hero', hero)
             data.append('content', content)
+            console.log(data)
             const res = await axios({
                 method: 'POST',
                 url: '/user/createblog',
@@ -339,7 +340,7 @@ if (createForm) {
                 showAlert('success', 'Blog published successfully!')
                 window.setTimeout(() => {
                     hideAlert();
-                    location.assign('/create')
+                    // location.assign('/create')
                 }, 1500)
             }
         } catch (error) {

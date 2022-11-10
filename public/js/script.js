@@ -330,7 +330,7 @@ if (createForm) {
             data.append('tags', tags)
             data.append('hero', hero)
             data.append('content', content)
-            console.log(data)
+            console.log(title, tags, content)
             const res = await axios({
                 method: 'POST',
                 url: '/user/createblog',
